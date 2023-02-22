@@ -3,42 +3,64 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 void main() {
-  runApp(const HotreloadWidgetbook());
+  runApp(const HotReloadWidgetbook());
 }
 
-class HotreloadWidgetbook extends StatelessWidget {
-  const HotreloadWidgetbook({super.key});
+class HotReloadWidgetbook extends StatelessWidget {
+  const HotReloadWidgetbook({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
+      devices: [
+        Apple.iPhone8,
+      ],
+      themes: [
+        WidgetbookTheme(
+          name: 'Light',
+          data: getLightTheme,
+        ),
+        WidgetbookTheme(
+          name: 'Dark',
+          data: getDarkTheme,
+        ),
+      ],
+      appInfo: AppInfo(name: 'Example'),
       categories: [
         WidgetbookCategory(
           name: 'widgets',
           widgets: [
             WidgetbookComponent(
-              name: 'Text Box',
+              name: 'notification Box',
               useCases: [
                 WidgetbookUseCase(
-                  name: 'batata',
-                  builder: (context) => const CustomTextWidget(),
+                  name: 'notification',
+                  builder: (context) => const NotificationWidget(
+                      color: Colors.purple, notification: 34),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Filter',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'selected Filter',
+                  builder: (context) => const ListFilterButtonWidget(),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'search Box',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'search',
+                  builder: (context) => const SearchWidget(),
                 ),
               ],
             ),
           ],
         ),
       ],
-      themes: [
-        WidgetbookTheme(
-          name: 'Light',
-          data: ThemeData.light(),
-        ),
-        WidgetbookTheme(
-          name: 'Dark',
-          data: ThemeData.dark(),
-        ),
-      ],
-      appInfo: AppInfo(name: 'Example'),
     );
   }
 }
