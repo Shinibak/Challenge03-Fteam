@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../themes/theme_extensions.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});
@@ -6,6 +7,8 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context).extension<ThemeCustom>()!;
+
     return Container(
       height: screenSize * 0.16,
       width: screenSize * 0.906,
@@ -27,7 +30,10 @@ class SearchWidget extends StatelessWidget {
           SizedBox(
             width: screenSize * 0.037,
           ),
-          const Text('Search'),
+          Text(
+            'Search',
+            style: theme.subtitle2,
+          ),
         ],
       ),
     );

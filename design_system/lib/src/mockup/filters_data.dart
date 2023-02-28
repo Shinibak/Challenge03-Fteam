@@ -1,8 +1,8 @@
-import '../models/filter_modal.dart';
 
-List<FilterModal> filtersDataList = [
-  const FilterModal(text: 'All', icon: 'images/Icons/chat.png', notifications: 35),
-  const FilterModal(text: 'Live Chat', icon: 'images/Icons/archive.png',notifications: 2),
-  const FilterModal(text: 'Live blocked', icon: 'images/Icons/bookmark.png',  notifications: 33),
+
+// List<FilterModal> filtersDataList = [
+//   const FilterModal(text: 'All', icon: 'assets/icons/chat.png', notifications: 35),
+//   const FilterModal(text: 'Live Chat', icon: 'assets/icons/archive.png',notifications: 2),
+//   const FilterModal(text: 'Live blocked', icon: 'assets/icons/bookmark.png',  notifications: 33),
  
-];
+// ];
