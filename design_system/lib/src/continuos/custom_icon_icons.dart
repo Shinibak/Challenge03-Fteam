@@ -5,7 +5,7 @@ class CustomIcon {
 
   static const _kFontFam = 'CustomIcon';
 
-  static const IconData bookmarkMinusIcon = IconData(
+  static const IconData bookmarkIcon = IconData(
     0xe804,
     fontFamily: _kFontFam,
   );
@@ -51,6 +51,26 @@ class CustomIcon {
   );
   static const IconData callingIcon = IconData(
     0xe80f,
+    fontFamily: _kFontFam,
+  );
+  static const IconData calcIcon = IconData(
+    0xe810,
+    fontFamily: _kFontFam,
+  );
+  static const IconData sentIcon = IconData(
+    0xe811,
+    fontFamily: _kFontFam,
+  );
+  static const IconData paperClipIcon = IconData(
+    0xe812,
+    fontFamily: _kFontFam,
+  );
+  static const IconData happyIcon = IconData(
+    0xe813,
+    fontFamily: _kFontFam,
+  );
+  static const IconData folderBookmarkIcon = IconData(
+    0xe814,
     fontFamily: _kFontFam,
   );
 }

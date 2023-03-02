@@ -10,4 +10,5 @@ class FilterModal {
     required this.icon,
     required this.notifications,
   });
+
 }

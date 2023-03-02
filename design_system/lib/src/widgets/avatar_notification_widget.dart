@@ -1,18 +1,22 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import '../themes/theme_extensions.dart';
 
 class AvatarNotificationWidget extends StatelessWidget {
   final String avatarImage;
   final int notifications;
+  final bool active;
   const AvatarNotificationWidget({
     super.key,
     required this.avatarImage,
     required this.notifications,
+    required this.active,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
+
     return Stack(
       children: [
         SizedBox(
@@ -36,7 +40,7 @@ class AvatarNotificationWidget extends StatelessWidget {
           bottom: 0,
           child: NotificationWidget(
             notification: notifications,
-            color: Colors.purple,
+            activeNotification: active,
           ),
         ),
       ],

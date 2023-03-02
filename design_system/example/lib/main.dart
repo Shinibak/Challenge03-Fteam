@@ -36,7 +36,7 @@ class HotReloadWidgetbook extends StatelessWidget {
                 WidgetbookUseCase(
                   name: 'notification',
                   builder: (context) => const NotificationWidget(
-                      color: Colors.purple, notification: 34),
+                      activeNotification: true, notification: 34),
                 ),
               ],
             ),
@@ -46,11 +46,9 @@ class HotReloadWidgetbook extends StatelessWidget {
                 WidgetbookUseCase(
                   name: 'selected Filter',
                   builder: (context) => const FilterButtonWidget(
-                    filterData: FilterModal(
-                        text: 'All',
-                        icon: CustomIcon.archiveIcon,
-                        notifications: 35),
-                  ),
+                      text: 'All',
+                      icon: CustomIcon.archiveIcon,
+                      notifications: 35),
                 ),
               ],
             ),
@@ -73,29 +71,19 @@ class HotReloadWidgetbook extends StatelessWidget {
                 ),
               ],
             ),
-            WidgetbookComponent(
-              name: 'Menu Bar',
-              useCases: [
-                WidgetbookUseCase(
-                  name: 'show menus',
-                  builder: (context) => const MenuBarWidget(),
-                ),
-              ],
-            ),
+           
             WidgetbookComponent(
               name: 'chat Preview message',
               useCases: [
                 WidgetbookUseCase(
                   name: 'example',
-                  builder: (context) => ChatPreviewWidget(
-                      profile: ProfileModal(
-                        avatarImage: 'assets/avatar/avatar.png',
-                        lastMessage: 'potato',
-                        lastMessageData: '12:23',
-                        muted: true,
-                        name: 'Raphael',
-                        number: '(12) 23456=5656',
-                      ),
+                  builder: (context) => const ChatPreviewWidget(
+                      avatarImage: 'assets/avatar/avatar.png',
+                      lastMessage: 'potato',
+                      lastMessageData: '12:23',
+                      muted: true,
+                      name: 'Raphael',
+                      number: '(12) 23456=5656',
                       notifications: 34),
                 ),
               ],
@@ -107,6 +95,7 @@ class HotReloadWidgetbook extends StatelessWidget {
                   name: 'Avatar notifications',
                   builder: (context) => const AvatarNotificationWidget(
                       notifications: 23,
+                      active: true,
                       avatarImage: 'assets/avatar/avatar.png'),
                 ),
                 WidgetbookUseCase(

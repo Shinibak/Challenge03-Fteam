@@ -7,13 +7,13 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
-    final theme = Theme.of(context).extension<ThemeCustom>()!;
+    final textStyle = Theme.of(context).textTheme;
 
     return Container(
       height: screenSize * 0.16,
       width: screenSize * 0.906,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black.withOpacity(0.7),
         borderRadius: BorderRadius.circular(screenSize * 0.053),
       ),
       child: Row(
@@ -24,7 +24,7 @@ class SearchWidget extends StatelessWidget {
           ),
           Icon(
             Icons.search,
-            color: Colors.grey,
+            color: Theme.of(context).iconTheme.color,
             size: screenSize * 0.058,
           ),
           SizedBox(
@@ -32,7 +32,7 @@ class SearchWidget extends StatelessWidget {
           ),
           Text(
             'Search',
-            style: theme.subtitle2,
+            style: textStyle.subtitle2,
           ),
         ],
       ),

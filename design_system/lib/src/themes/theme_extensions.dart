@@ -1,34 +1,50 @@
 import 'package:flutter/material.dart';
 
 class ThemeCustom extends ThemeExtension<ThemeCustom> {
-  final TextStyle? caption;
-  final TextStyle? subtitle1;
-  final TextStyle? subtitle2;
-  final TextStyle? overline1;
-  final TextStyle? overline2;
+  final TextStyle? buttonTextOnStyle;
+  final TextStyle? buttonTestOffStyle;
+  final Color? buttonColorOn;
+  final Color? buttonColorOff;
+  final Color? notificationColorOn;
+  final Color? notificationColorOff;
+  final Color? buttonIconColorOn;
+  final Color? buttonIconColorOff;
+  final Color? mutedIcon;
 
   ThemeCustom({
-    required this.caption,
-    required this.subtitle1,
-    required this.subtitle2,
-    required this.overline1,
-    required this.overline2,
+    required this.buttonTextOnStyle,
+    required this.buttonTestOffStyle,
+    required this.buttonColorOn,
+    required this.buttonColorOff,
+    required this.notificationColorOn,
+    required this.notificationColorOff,
+    required this.buttonIconColorOn,
+    required this.buttonIconColorOff,
+    required this.mutedIcon,
   });
 
   @override
   ThemeCustom copyWith([
-    TextStyle? caption,
-    TextStyle? subtitle1,
-    TextStyle? subtitle2,
-    TextStyle? overline1,
-    TextStyle? overline2,
+    TextStyle? buttonTextOnStyle,
+    TextStyle? buttonTestOffStyle,
+    Color? buttonColorOn,
+    Color? buttonColorOff,
+    Color? notificationColorOn,
+    Color? notificationColorOff,
+    Color? buttonIconColorOn,
+    Color? buttonIconColorOff,
+    Color? mutedIcon,
   ]) {
     return ThemeCustom(
-      caption: caption ?? this.caption,
-      subtitle1: subtitle1 ?? this.subtitle1,
-      subtitle2: subtitle2 ?? this.subtitle2,
-      overline1: overline1 ?? this.overline1,
-      overline2: overline1 ?? this.overline2,
+      buttonTextOnStyle: buttonTextOnStyle ?? this.buttonTextOnStyle,
+      buttonTestOffStyle: buttonTestOffStyle ?? this.buttonTestOffStyle,
+      buttonColorOn: buttonColorOn ?? this.buttonColorOn,
+      buttonColorOff: buttonColorOff ?? this.buttonColorOff,
+      notificationColorOn: notificationColorOn ?? this.notificationColorOn,
+      notificationColorOff: notificationColorOff ?? this.notificationColorOff,
+      buttonIconColorOn: buttonIconColorOn ?? this.buttonIconColorOn,
+      buttonIconColorOff: buttonIconColorOff ?? this.buttonIconColorOff,
+      mutedIcon: mutedIcon ?? this.mutedIcon,
     );
   }
 
@@ -38,11 +54,39 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
       return this;
     }
     return ThemeCustom(
-      caption: TextStyle.lerp(caption, other.caption, t),
-      subtitle1: TextStyle.lerp(subtitle1, other.subtitle1, t),
-      subtitle2: TextStyle.lerp(subtitle2, other.subtitle2, t),
-      overline1: TextStyle.lerp(overline1, other.overline1, t),
-      overline2: TextStyle.lerp(overline2, other.overline2, t),
+      buttonTextOnStyle: TextStyle.lerp(
+        buttonTextOnStyle,
+        other.buttonTextOnStyle,
+        t,
+      ),
+      buttonTestOffStyle: TextStyle.lerp(
+        buttonTestOffStyle,
+        other.buttonTestOffStyle,
+        t,
+      ),
+      buttonColorOn: Color.lerp(buttonColorOn, other.buttonColorOn, t),
+      buttonColorOff: Color.lerp(buttonColorOff, other.buttonColorOff, t),
+      notificationColorOn: Color.lerp(
+        notificationColorOn,
+        other.notificationColorOn,
+        t,
+      ),
+      notificationColorOff: Color.lerp(
+        notificationColorOff,
+        other.notificationColorOff,
+        t,
+      ),
+      buttonIconColorOn: Color.lerp(
+        buttonIconColorOn,
+        other.buttonIconColorOn,
+        t,
+      ),
+      buttonIconColorOff: Color.lerp(
+        buttonIconColorOff,
+        other.buttonIconColorOff,
+        t,
+      ),
+      mutedIcon: Color.lerp(mutedIcon, other.mutedIcon, t),
     );
   }
 }
