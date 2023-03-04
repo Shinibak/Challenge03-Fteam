@@ -7,12 +7,14 @@ class FilterButtonWidget extends StatefulWidget {
   final String text;
   final IconData icon;
   final int notifications;
+  final bool active;
 
   const FilterButtonWidget({
     super.key,
     required this.text,
     required this.icon,
     required this.notifications,
+    required this.active,
   });
 
   @override
@@ -20,7 +22,7 @@ class FilterButtonWidget extends StatefulWidget {
 }
 
 class _FilterButtonWidgetState extends State<FilterButtonWidget> {
-  bool wasPressed = false;
+  late bool wasPressed = widget.active;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,9 @@ class _FilterButtonWidgetState extends State<FilterButtonWidget> {
             Icon(
               widget.icon,
               size: screenSize * 0.058,
+              color: wasPressed
+                  ? theme.buttonIconColorOn
+                  : theme.notificationColorOff,
             ),
             SizedBox(
               width: screenSize * 0.032,

@@ -4,20 +4,21 @@ import '../themes/theme_extensions.dart';
 
 class MenuButtonWidget extends StatefulWidget {
   final IconData icon;
-  const MenuButtonWidget({super.key, required this.icon});
+  final bool active;
+  const MenuButtonWidget({super.key, required this.icon, required this.active});
 
   @override
   State<MenuButtonWidget> createState() => _MenuButtonWidgetState();
 }
 
 class _MenuButtonWidgetState extends State<MenuButtonWidget> {
-  bool wasPressed = false;
+  late bool wasPressed = widget.active;
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
-    
+
     return Container(
       height: screenSize * 0.133,
       width: screenSize * 0.133,
@@ -36,6 +37,8 @@ class _MenuButtonWidgetState extends State<MenuButtonWidget> {
         child: Center(
           child: Icon(
             widget.icon,
+            color:
+                wasPressed ? theme.buttonIconColorOn : theme.buttonIconColorOff,
             size: screenSize * 0.058,
           ),
         ),

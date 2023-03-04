@@ -17,7 +17,6 @@ class SearchWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(screenSize * 0.053),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             width: screenSize * 0.053,

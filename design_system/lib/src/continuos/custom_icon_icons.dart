@@ -73,4 +73,16 @@ class CustomIcon {
     0xe814,
     fontFamily: _kFontFam,
   );
+  static const IconData handWaveIcon = IconData(
+    0xe815,
+    fontFamily: _kFontFam,
+  );
+  static const IconData horizontalDotsIcon = IconData(
+    0xe816,
+    fontFamily: _kFontFam,
+  );
+  static const IconData arrowLeftIcon = IconData(
+    0xe817,
+    fontFamily: _kFontFam,
+  );
 }

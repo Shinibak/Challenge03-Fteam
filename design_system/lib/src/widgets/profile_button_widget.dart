@@ -1,4 +1,4 @@
-import 'package:design_system/src/constants/colors.dart';
+import 'package:design_system/src/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../themes/theme_extensions.dart';

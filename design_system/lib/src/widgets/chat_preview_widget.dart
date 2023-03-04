@@ -54,7 +54,7 @@ class ChatPreviewWidget extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: text.overline,
+                      style: text.bodyText2,
                     ),
                     Text(
                       lastMessageData,

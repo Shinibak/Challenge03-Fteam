@@ -14,7 +14,7 @@ class NotificationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
-     final textStyle = Theme.of(context).textTheme;
+    final textStyle = Theme.of(context).textTheme;
     return Container(
       height: screenSize * 0.053,
       width: screenSize * 0.053,
@@ -22,13 +22,12 @@ class NotificationWidget extends StatelessWidget {
         color: activeNotification
             ? theme.notificationColorOn
             : theme.notificationColorOff,
-        //cColors.purple : Colors.grey,
         borderRadius: BorderRadius.circular(screenSize * 0.026),
       ),
       child: Center(
         child: Text(
           notification.toString(),
-          style: textStyle.bodySmall,
+          style: textStyle.overline,
         ),
       ),
     );

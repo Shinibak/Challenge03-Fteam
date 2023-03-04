@@ -16,10 +16,10 @@ class HotReloadWidgetbook extends StatelessWidget {
         Apple.iPhone8,
       ],
       themes: [
-        WidgetbookTheme(
-          name: 'Light',
-          data: lightTheme,
-        ),
+        // WidgetbookTheme(
+        //   name: 'Light',
+        //   data: lightTheme,
+        // ),
         WidgetbookTheme(
           name: 'Dark',
           data: darkTheme,
@@ -46,9 +46,11 @@ class HotReloadWidgetbook extends StatelessWidget {
                 WidgetbookUseCase(
                   name: 'selected Filter',
                   builder: (context) => const FilterButtonWidget(
-                      text: 'All',
-                      icon: CustomIcon.archiveIcon,
-                      notifications: 35),
+                    text: 'All',
+                    icon: CustomIcon.archiveIcon,
+                    notifications: 35,
+                    active: false,
+                  ),
                 ),
               ],
             ),
@@ -57,8 +59,10 @@ class HotReloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'Button',
-                  builder: (context) =>
-                      const MenuButtonWidget(icon: CustomIcon.chatBoxIcon),
+                  builder: (context) => const MenuButtonWidget(
+                    icon: CustomIcon.chatBoxIcon,
+                    active: true,
+                  ),
                 ),
               ],
             ),
@@ -71,7 +75,6 @@ class HotReloadWidgetbook extends StatelessWidget {
                 ),
               ],
             ),
-           
             WidgetbookComponent(
               name: 'chat Preview message',
               useCases: [
@@ -83,8 +86,23 @@ class HotReloadWidgetbook extends StatelessWidget {
                       lastMessageData: '12:23',
                       muted: true,
                       name: 'Raphael',
-                      number: '(12) 23456=5656',
+                      number: '(12) 23456-5656',
                       notifications: 34),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Profile card',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Profile example',
+                  builder: (context) => const ProfileCardWidget(
+                      avatarProfile: 'assets/avatar/avatar.png',
+                      nameProfile: 'Ronaldo',
+                      numberCell: '(12) 998174-3437',
+                      message: 'Hello Everybody',
+                      onlineStatus: true,
+                      listButtonsProfile: []),
                 ),
               ],
             ),

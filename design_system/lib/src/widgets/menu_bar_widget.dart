@@ -1,7 +1,9 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class MenuBarWidget extends StatelessWidget {
-  const MenuBarWidget({super.key});
+  final List menuList;
+  const MenuBarWidget({super.key, required this.menuList});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +21,20 @@ class MenuBarWidget extends StatelessWidget {
           Row(
             children: [
               SizedBox(width: screenSize * 0.074),
-              //listView.Builder
-
+              ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                itemCount: menuList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                     MenuButtonWidget(icon: menuList[index].icon,
+                     active: menuList[index].active),
+                      if (index < menuList.length - 1)
+                        SizedBox(height: screenSize * 0.021)
+                    ],
+                  );
+                },
+              ),
               SizedBox(width: screenSize * 0.074),
             ],
           ),

@@ -8,11 +8,11 @@ class AvatarTodoListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: screenSize * 0.106,
-      width: screenSize * 0.106,
+      height: screenSize * 0.2133333,
+      width: screenSize * 0.2133333,
       child: CircleAvatar(
         backgroundImage: AssetImage(avatarImage),
-        radius: screenSize * 0.053,
+        radius: screenSize * 0.098,
       ),
     );
   }
