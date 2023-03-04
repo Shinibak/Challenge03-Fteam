@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
+
 class FilterModal {
   final String text;
-  final String icon;
+  final IconData icon;
   final int notifications;
 
   const FilterModal({
@@ -8,4 +10,5 @@ class FilterModal {
     required this.icon,
     required this.notifications,
   });
+
 }

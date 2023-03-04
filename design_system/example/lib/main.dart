@@ -18,11 +18,11 @@ class HotReloadWidgetbook extends StatelessWidget {
       themes: [
         WidgetbookTheme(
           name: 'Light',
-          data: getLightTheme,
+          data: lightTheme,
         ),
         WidgetbookTheme(
           name: 'Dark',
-          data: getDarkTheme,
+          data: darkTheme,
         ),
       ],
       appInfo: AppInfo(name: 'Example'),
@@ -36,16 +36,33 @@ class HotReloadWidgetbook extends StatelessWidget {
                 WidgetbookUseCase(
                   name: 'notification',
                   builder: (context) => const NotificationWidget(
-                      color: Colors.purple, notification: 34),
+                      activeNotification: true, notification: 34),
                 ),
               ],
             ),
             WidgetbookComponent(
-              name: 'Filter',
+              name: 'Filter Button',
               useCases: [
                 WidgetbookUseCase(
                   name: 'selected Filter',
-                  builder: (context) => const ListFilterButtonWidget(),
+                  builder: (context) => const FilterButtonWidget(
+                    text: 'All',
+                    icon: CustomIcon.archiveIcon,
+                    notifications: 35,
+                    active: false,
+                  ),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'App Bar Button',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Button',
+                  builder: (context) => const MenuButtonWidget(
+                    icon: CustomIcon.chatBoxIcon,
+                    active: true,
+                  ),
                 ),
               ],
             ),
@@ -55,6 +72,39 @@ class HotReloadWidgetbook extends StatelessWidget {
                 WidgetbookUseCase(
                   name: 'search',
                   builder: (context) => const SearchWidget(),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'chat Preview message',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'example',
+                  builder: (context) => const ChatPreviewWidget(
+                      avatarImage: 'assets/avatar/avatar.png',
+                      lastMessage: 'potato',
+                      lastMessageData: '12:23',
+                      muted: true,
+                      name: 'Raphael',
+                      number: '(12) 23456-5656',
+                      notifications: 34),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Avatar Icon',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Avatar notifications',
+                  builder: (context) => const AvatarNotificationWidget(
+                      notifications: 23,
+                      active: true,
+                      avatarImage: 'assets/avatar/avatar.png'),
+                ),
+                WidgetbookUseCase(
+                  name: 'Avatar Todo List',
+                  builder: (context) => const AvatarTodoListWidget(
+                      avatarImage: 'assets/avatar/avatar.png'),
                 ),
               ],
             ),

@@ -1,23 +1,24 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import '../mockup/filters_data.dart';
-import 'filter_button_widget.dart';
 
 class ListFilterButtonWidget extends StatelessWidget {
-  const ListFilterButtonWidget({super.key});
+  final List filterList;
+  const ListFilterButtonWidget({super.key, required this.filterList});
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
-    final filters = filtersDataList;
-    return SizedBox(
-      height: screenSize * 0.117,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: filters.length,
-        itemBuilder: (BuildContext context, int index) {
-          return FilterButtonWidget(filterList: filters[index]);
-        },
-      ),
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: filterList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return FilterButtonWidget(
+          text: filterList[index].text,
+          icon: filterList[index].icon,
+          notifications: filterList[index].notifications,
+          active: filterList[index].active,
+
+        );
+      },
     );
   }
 }
