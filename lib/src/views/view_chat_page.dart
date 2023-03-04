@@ -1,4 +1,4 @@
-import 'package:challenge03_fteam/src/mockup/filters_data.dart';
+import 'package:challenge03_fteam/src/mockup/filters_buttons_data.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class ViewChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
-    final filters = filterDataList;
+    final filters = filtersButtonsDataList;
 
     return Scaffold(
       body: Column(

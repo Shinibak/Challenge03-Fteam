@@ -9,4 +9,5 @@ class MyColors {
   final Color javaColor = const Color.fromARGB(255, 197, 64, 238);
   final Color uiUxColor = const Color.fromARGB(255, 120, 133, 250);
   final Color projectManagerColor = const Color.fromARGB(255, 123, 70, 209);
+  final Color cinzaEscuro = const Color.fromARGB(255, 26, 26, 26);
 }

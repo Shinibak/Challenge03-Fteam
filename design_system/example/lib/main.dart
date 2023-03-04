@@ -16,10 +16,10 @@ class HotReloadWidgetbook extends StatelessWidget {
         Apple.iPhone8,
       ],
       themes: [
-        // WidgetbookTheme(
-        //   name: 'Light',
-        //   data: lightTheme,
-        // ),
+        WidgetbookTheme(
+          name: 'Light',
+          data: lightTheme,
+        ),
         WidgetbookTheme(
           name: 'Dark',
           data: darkTheme,
@@ -88,21 +88,6 @@ class HotReloadWidgetbook extends StatelessWidget {
                       name: 'Raphael',
                       number: '(12) 23456-5656',
                       notifications: 34),
-                ),
-              ],
-            ),
-            WidgetbookComponent(
-              name: 'Profile card',
-              useCases: [
-                WidgetbookUseCase(
-                  name: 'Profile example',
-                  builder: (context) => const ProfileCardWidget(
-                      avatarProfile: 'assets/avatar/avatar.png',
-                      nameProfile: 'Ronaldo',
-                      numberCell: '(12) 998174-3437',
-                      message: 'Hello Everybody',
-                      onlineStatus: true,
-                      listButtonsProfile: []),
                 ),
               ],
             ),

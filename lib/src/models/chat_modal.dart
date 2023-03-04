@@ -1,5 +1,5 @@
 class ChatModal {
-  final String message;
+  final List<String> message;
   final String hour;
   final bool sending;
 

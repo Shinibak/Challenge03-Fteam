@@ -1,25 +1,15 @@
+
+import 'package:challenge03_fteam/src/mockup/profile_buttons_data.dart';
 import 'package:design_system/design_system.dart';
-import 'package:design_system/src/widgets/Profile_skils_widget.dart';
-import 'package:design_system/src/widgets/profile_button_widget.dart';
 import 'package:flutter/material.dart';
-import '../themes/colors.dart';
-import 'online_status_widget.dart';
+
+import '../models/profile_modal.dart';
 
 class ProfileCardWidget extends StatelessWidget {
-  final String avatarProfile;
-  final String nameProfile;
-  final String numberCell;
-  final String message;
-  final bool onlineStatus;
-  final List listButtonsProfile;
+  final ProfileModal profile;
   const ProfileCardWidget({
-    super.key,
-    required this.avatarProfile,
-    required this.nameProfile,
-    required this.numberCell,
-    required this.message,
-    required this.onlineStatus,
-    required this.listButtonsProfile,
+    super.key, required this.profile,
+
   });
 
   @override
@@ -27,6 +17,7 @@ class ProfileCardWidget extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
     final colors = MyColors();
+    final listButtonsProfile = profileButtonsData;
     return Container(
       height: screenSize * 1.157,
       width: screenSize,
@@ -56,7 +47,7 @@ class ProfileCardWidget extends StatelessWidget {
               SizedBox(width: screenSize * 0.309),
               Padding(
                 padding: EdgeInsets.only(top: screenSize * 0.0053),
-                child: AvatarTodoListWidget(avatarImage: avatarProfile),
+                child: AvatarTodoListWidget(avatarImage: profile.avatarImage),
               ),
               SizedBox(width: screenSize * 0.224),
               Icon(
@@ -71,16 +62,16 @@ class ProfileCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                nameProfile,
+                profile.name,
                 style: textStyle.bodyText1,
               ),
               SizedBox(width: screenSize * 0.0106),
-              OnlineStatusWidget(isOnline: onlineStatus),
+              OnlineStatusWidget(isOnline: profile.online),
             ],
           ),
           SizedBox(height: screenSize * 0.037),
           Text(
-            numberCell,
+            profile.number,
             style: textStyle.subtitle2,
           ),
           SizedBox(height: screenSize * 0.048),
@@ -112,7 +103,7 @@ class ProfileCardWidget extends StatelessWidget {
                 children: [
                   SizedBox(height: screenSize * 0.010),
                   Text(
-                    message,
+                    profile.status,
                     style: textStyle.caption,
                   ),
                 ],

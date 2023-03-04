@@ -5,7 +5,9 @@ class ProfileModal {
   final String name;
   final String number;
   final bool muted;
-  final ChatModal message;
+  final bool online;
+  final String status;
+  final List<ChatModal> message;
 
   ProfileModal({
     required this.avatarImage,
@@ -13,5 +15,7 @@ class ProfileModal {
     required this.number,
     required this.muted,
     required this.message,
+    required this.online,
+    required this.status,
   });
 }

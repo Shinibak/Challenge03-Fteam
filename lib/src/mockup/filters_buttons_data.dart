@@ -1,7 +1,7 @@
 import 'package:design_system/design_system.dart';
 import '../models/filter_button_modal.dart';
 
-List<FilterButtonModal> filterDataList = [
+List<FilterButtonModal> filtersButtonsDataList = [
   const FilterButtonModal(
     text: 'All',
     icon: CustomIcon.chatBoxIcon,
