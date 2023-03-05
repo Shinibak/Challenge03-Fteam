@@ -7,12 +7,13 @@ List<ProfileModal> profilesDataList = [
     muted: false,
     name: 'Jonh Tornton',
     number: '(15) 99872-4545',
-    message: [
+    messages: [
       ChatModal(message: ['eae'], hour: '14:34', sending: true),
       ChatModal(message: ['eae', 'de boa ?'], hour: '14:34', sending: false),
       ChatModal(message: ['no'], hour: '14:34', sending: true),
     ],
     online: true,
-    status: 'batata'
+    status: 'batata',
+    notifications: 33,
   ),
 ];

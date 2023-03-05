@@ -18,6 +18,7 @@ class ProfileCardWidget extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme;
     final colors = MyColors();
     final listButtonsProfile = profileButtonsData;
+    
     return Container(
       height: screenSize * 1.157,
       width: screenSize,

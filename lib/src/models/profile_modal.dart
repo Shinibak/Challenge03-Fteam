@@ -7,15 +7,17 @@ class ProfileModal {
   final bool muted;
   final bool online;
   final String status;
-  final List<ChatModal> message;
+  final List<ChatModal> messages;
+  final int notifications;
 
   ProfileModal({
     required this.avatarImage,
     required this.name,
     required this.number,
     required this.muted,
-    required this.message,
+    required this.messages,
     required this.online,
     required this.status,
+    required this.notifications,
   });
 }

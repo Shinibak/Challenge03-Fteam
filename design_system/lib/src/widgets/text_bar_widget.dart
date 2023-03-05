@@ -1,7 +1,4 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-
 import '../../design_system.dart';
 
 class TextBarWidget extends StatelessWidget {
@@ -27,7 +24,7 @@ class TextBarWidget extends StatelessWidget {
           SizedBox(width: screenSize * 0.048),
           SizedBox(
             width: screenSize * 0.469,
-            child: Text(''),
+            child: const Text(''),
           ),
           SizedBox(width: screenSize * 0.064),
           Icon(CustomIcon.happyIcon, color: iconColor),
