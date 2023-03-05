@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class FilterButtonModal {
+class FilterModal {
   final String text;
   final IconData icon;
   final int notifications;
   final bool active;
 
-  const FilterButtonModal({
+  const FilterModal({
     required this.text,
     required this.icon,
     required this.notifications,

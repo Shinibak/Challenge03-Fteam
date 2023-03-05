@@ -65,24 +65,19 @@ class ChatPreviewWidget extends StatelessWidget {
                 SizedBox(height: screenSize * 0.026),
                 Row(
                   children: [
-                    Text(
-                      number,
-                      style: text.bodySmall,
-                    ),
+                    Text(number, style: text.bodySmall),
                   ],
                 ),
-                SizedBox(height: screenSize * 0.026),
+                // SizedBox(height: screenSize * 0.021),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
-                        SizedBox(
-                          height: screenSize * 0.0106,
-                        ),
+                        SizedBox(height: screenSize * 0.0053),
                         Text(
                           lastMessage,
-                          style: text.caption,
+                          style: text.bodyText1,
                         ),
                       ],
                     ),
