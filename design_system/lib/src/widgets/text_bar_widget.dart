@@ -13,8 +13,8 @@ class TextBarWidget extends StatelessWidget {
     final colors = MyColors();
 
     return Container(
-      height: screenSize * 0.898,
-      width: screenSize * 0.154,
+      width: screenSize * 0.898,
+      height: screenSize * 0.154,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.042),
         color: colors.cinzaEscuro,
@@ -27,9 +27,17 @@ class TextBarWidget extends StatelessWidget {
             child: const Text(''),
           ),
           SizedBox(width: screenSize * 0.064),
-          Icon(CustomIcon.happyIcon, color: iconColor),
+          Icon(
+            CustomIcon.happyIcon,
+            color: iconColor,
+            size: screenSize * 0.058,
+          ),
           SizedBox(width: screenSize * 0.026),
-          Icon(CustomIcon.paperClipIcon, color: iconColor),
+          Icon(
+            CustomIcon.paperClipIcon,
+            color: iconColor,
+            size: screenSize * 0.058,
+          ),
           SizedBox(width: screenSize * 0.0373),
           Container(
             height: screenSize * 0.106,

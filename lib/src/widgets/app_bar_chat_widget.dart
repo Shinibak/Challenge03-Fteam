@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppBarChatWidget extends StatelessWidget {
   final ProfileModal profile;
+
   const AppBarChatWidget({
     super.key,
     required this.profile,
@@ -17,9 +18,8 @@ class AppBarChatWidget extends StatelessWidget {
     return Container(
       height: screenSize * 0.261,
       width: screenSize,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(screenSize * 0.096),
       ),
       child: Column(
         children: [
@@ -29,11 +29,12 @@ class AppBarChatWidget extends StatelessWidget {
               SizedBox(width: screenSize * 0.048),
               AvatarChatWidget(avatarImage: profile.avatarImage),
               SizedBox(width: screenSize * 0.026),
-              Text(
-                profile.name,
-                style: textStyle.bodyText2,
+              Expanded(
+                child: Text(
+                  profile.name,
+                  style: textStyle.bodyText2,
+                ),
               ),
-              SizedBox(width: screenSize * 0.101),
               Container(
                 height: screenSize * 0.106,
                 decoration: BoxDecoration(
@@ -42,7 +43,11 @@ class AppBarChatWidget extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/tree', arguments: profile);
+                    Navigator.pushNamed(
+                      context,
+                      '/tree',
+                      arguments: profile,
+                    );
                   },
                   child: Column(
                     children: [
@@ -64,13 +69,16 @@ class AppBarChatWidget extends StatelessWidget {
               SizedBox(width: screenSize * 0.037),
               Icon(
                 CustomIcon.folderBookmarkIcon,
-                color: theme.todoColorOn,
+                color: Theme.of(context).iconTheme.color,
+                size: screenSize * 0.058,
               ),
               SizedBox(width: screenSize * 0.026),
               Icon(
                 CustomIcon.calcIcon,
-                color: theme.todoColorOn,
+                color: Theme.of(context).iconTheme.color,
+                size: screenSize * 0.058,
               ),
+              SizedBox(width: screenSize * 0.048),
             ],
           ),
         ],

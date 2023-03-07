@@ -19,8 +19,8 @@ class ProfileButtonsWidget extends StatelessWidget {
     final colors = MyColors();
 
     return Container(
-      height: screenSize * 0.133,
-      width: screenSize * 0.133,
+      height: screenSize * 0.16,
+      width: screenSize * 0.16,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.04),
         color: colors.profileButton,
