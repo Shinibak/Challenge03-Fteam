@@ -1,15 +1,14 @@
-
 import 'package:challenge03_fteam/src/mockup/profile_buttons_data.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-
+import '../models/profile_button_modal.dart';
 import '../models/profile_modal.dart';
 
 class ProfileCardWidget extends StatelessWidget {
   final ProfileModal profile;
   const ProfileCardWidget({
-    super.key, required this.profile,
-
+    super.key,
+    required this.profile,
   });
 
   @override
@@ -18,7 +17,7 @@ class ProfileCardWidget extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme;
     final colors = MyColors();
     final listButtonsProfile = profileButtonsData;
-    
+
     return Container(
       height: screenSize * 1.157,
       width: screenSize,
@@ -77,22 +76,30 @@ class ProfileCardWidget extends StatelessWidget {
           ),
           SizedBox(height: screenSize * 0.048),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ListView.builder(
-                itemCount: listButtonsProfile.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Row(
-                    children: [
-                      ProfileButtonsWidget(
+              SizedBox(
+                width: screenSize * 0.112,
+              ),
+              SizedBox(
+                height: screenSize * 0.16,
+                width: screenSize * 0.784,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: listButtonsProfile.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        right: (index < listButtonsProfile.length - 1)
+                            ? screenSize * 0.048
+                            : 0,
+                      ),
+                      child: ProfileButtonsWidget(
                         icon: listButtonsProfile[index].icon,
                         active: listButtonsProfile[index].active,
                       ),
-                      if (index < listButtonsProfile.length - 1)
-                        SizedBox(width: screenSize * 0.048),
-                    ],
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ],
           ),

@@ -92,6 +92,39 @@ class HotReloadWidgetbook extends StatelessWidget {
               ],
             ),
             WidgetbookComponent(
+              name: 'chat message',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'send',
+                  builder: (context) =>
+                      const MessageSentWidget(message: 'batata'),
+                ),
+                WidgetbookUseCase(
+                  name: 'received',
+                  builder: (context) =>
+                      const MessageReceiveWidget(message: 'batata'),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'chat message completo',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'send',
+                  builder: (context) => const SentMessageWidget(
+                      hours: '12:00', messages: ['oie', 'batata']),
+                ),
+                WidgetbookUseCase(
+                  name: 'received',
+                  builder: (context) => const IncomingMessageWidget(
+                      hours: '14:20',
+                      messages: ['quer um polistaixon?', 'responde'],
+                      profilePicture: 'assets/avatar/avatar.png',
+                      name: 'Sr. Inacio'),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
               name: 'Avatar Icon',
               useCases: [
                 WidgetbookUseCase(

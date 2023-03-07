@@ -16,29 +16,35 @@ class MenuBarWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(screenSize * 0.101),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: screenSize * 0.048),
           Row(
             children: [
-              SizedBox(width: screenSize * 0.074),
-              ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                itemCount: menuList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                     MenuButtonWidget(icon: menuList[index].icon,
-                     active: menuList[index].active),
-                      if (index < menuList.length - 1)
-                        SizedBox(height: screenSize * 0.021)
-                    ],
-                  );
-                },
+              SizedBox(
+                width: screenSize * 0.08,
               ),
-              SizedBox(width: screenSize * 0.074),
+              SizedBox(
+                height: screenSize * 0.133,
+                width: screenSize * 0.837,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: menuList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      children: [
+                        MenuButtonWidget(
+                          icon: menuList[index].icon,
+                          active: menuList[index].active,
+                        ),
+                        if (index < menuList.length - 1)
+                          SizedBox(width: screenSize * 0.042)
+                      ],
+                    );
+                  },
+                ),
+              ),
             ],
           ),
-          SizedBox(height: screenSize * 0.096),
         ],
       ),
     );

@@ -3,6 +3,8 @@ import 'package:challenge03_fteam/src/widgets/expanded_list_widget.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
+import '../mockup/menu_buttons_data.dart';
+
 class ViewChatPage extends StatelessWidget {
   const ViewChatPage({super.key});
 
@@ -10,41 +12,54 @@ class ViewChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     final filters = filtersDataList;
+    final menu = menuButtonsDataList;
 
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          SizedBox(
-            height: screenSize * 0.122,
-          ),
-          const SearchWidget(),
-          SizedBox(
-            height: screenSize * 0.042,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: screenSize * 0.048,
-            ),
-            child: SizedBox(
-              height: screenSize * 0.117,
-              child: ListFilterButtonWidget(filterList: filters),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filters.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
+          Positioned(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: screenSize * 0.122,
+                ),
+                const SearchWidget(),
+                SizedBox(
+                  height: screenSize * 0.042,
+                ),
+                Padding(
                   padding: EdgeInsets.only(
                     left: screenSize * 0.048,
-                    right: screenSize * 0.048,
                   ),
-                  child: ExpandedListWidget(
-                    filtersGroup: filters[index].text,
-                    active: filters[index].active,
+                  child: SizedBox(
+                    height: screenSize * 0.117,
+                    child: ListFilterButtonWidget(filterList: filters),
                   ),
-                );
-              },
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: filters.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          left: screenSize * 0.048,
+                          right: screenSize * 0.048,
+                        ),
+                        child: ExpandedListWidget(
+                          filtersGroup: filters[index].text,
+                          active: filters[index].active,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: MenuBarWidget(
+              menuList: menu,
             ),
           ),
         ],
