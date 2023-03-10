@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class OnlineStatusWidget extends StatelessWidget {
+  final double screenSize;
   final bool isOnline;
-  const OnlineStatusWidget({super.key, required this.isOnline});
+  const OnlineStatusWidget({super.key, required this.isOnline, required this.screenSize});
 
   @override
   Widget build(BuildContext context) {

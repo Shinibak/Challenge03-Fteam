@@ -4,7 +4,7 @@ import '../models/profile_modal.dart';
 List<ProfileModal> profilesDataList = [
   ProfileModal(
     avatarImage: 'assets/avatar/jonh_tornton.jpg',
-    muted: false,
+    isMuted: false,
     name: 'Jonh Tornton',
     number: '(15) 99872-4545',
     messages: [
@@ -27,7 +27,7 @@ List<ProfileModal> profilesDataList = [
         profilePicture: 'my',
       ),
     ],
-    online: true,
+    isOnline: true,
     status: 'batata',
     notifications: 33,
   ),

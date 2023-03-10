@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 class MessageSentWidget extends StatelessWidget {
+  final double screenSize;
   final String message;
-  const MessageSentWidget({super.key, required this.message});
+  const MessageSentWidget({
+    super.key,
+    required this.message,
+    required this.screenSize,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
     return Row(
       // mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           height: screenSize * 0.165,
@@ -23,10 +28,9 @@ class MessageSentWidget extends StatelessWidget {
             color: const Color.fromARGB(255, 133, 47, 168),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: screenSize * 0.058),
               Row(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(width: screenSize * 0.048),
                   Text(
@@ -36,7 +40,6 @@ class MessageSentWidget extends StatelessWidget {
                   SizedBox(width: screenSize * 0.048),
                 ],
               ),
-              SizedBox(height: screenSize * 0.064),
             ],
           ),
         ),

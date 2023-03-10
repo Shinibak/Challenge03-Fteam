@@ -4,9 +4,11 @@ import '../../design_system.dart';
 
 class CheckBoxWidget extends StatelessWidget {
   final bool wasCheck;
+  
+  final double screenSize;
   const CheckBoxWidget({
     super.key,
-    required this.wasCheck,
+    required this.wasCheck, required this.screenSize,
   });
 
   @override

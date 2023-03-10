@@ -1,7 +1,5 @@
-import 'package:design_system/src/widgets/avatar_chat_widget.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-
-import 'message_received_widget.dart';
 
 class IncomingMessageWidget extends StatelessWidget {
   final String profilePicture;
@@ -27,7 +25,10 @@ class IncomingMessageWidget extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AvatarChatWidget(avatarImage: profilePicture),
+            AvatarChatWidget(
+              avatarImage: profilePicture,
+              screenSize: screenSize,
+            ),
             SizedBox(width: screenSize * 0.032),
             Text(
               name,
@@ -46,12 +47,16 @@ class IncomingMessageWidget extends StatelessWidget {
           width: screenSize,
           child: ListView.builder(
             itemCount: messages.length,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: EdgeInsets.only(
                   bottom: screenSize * 0.021,
                 ),
-                child: MessageReceiveWidget(message: messages[index]),
+                child: MessageReceiveWidget(
+                  message: messages[index],
+                  screenSize: screenSize,
+                ),
               );
             },
           ),

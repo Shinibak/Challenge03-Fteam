@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../themes/theme_extensions.dart';
 
 class SearchWidget extends StatelessWidget {
-  const SearchWidget({super.key});
+  final double screenSize;
+  const SearchWidget({super.key, required this.screenSize});
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
 
     return Container(

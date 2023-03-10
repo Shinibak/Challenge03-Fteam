@@ -14,7 +14,6 @@ class AppBarChatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
-    final theme = Theme.of(context).extension<ThemeCustom>()!;
     return Container(
       height: screenSize * 0.261,
       width: screenSize,
@@ -27,7 +26,10 @@ class AppBarChatWidget extends StatelessWidget {
           Row(
             children: [
               SizedBox(width: screenSize * 0.048),
-              AvatarChatWidget(avatarImage: profile.avatarImage),
+              AvatarChatWidget(
+                avatarImage: profile.avatarImage,
+                screenSize: screenSize,
+              ),
               SizedBox(width: screenSize * 0.026),
               Expanded(
                 child: Text(

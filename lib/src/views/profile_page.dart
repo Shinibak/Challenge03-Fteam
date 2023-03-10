@@ -1,4 +1,4 @@
-import 'package:challenge03_fteam/src/widgets/add_todo_list.dart';
+import 'package:challenge03_fteam/src/widgets/todo_form.dart';
 import 'package:challenge03_fteam/src/widgets/profile_card_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/profile_modal.dart';
@@ -23,7 +23,19 @@ class _ProfilePageState extends State<ProfilePage> {
           ProfileCardWidget(profile: profile),
         ],
       ),
-      floatingActionButton: const AddTodoList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const TodoFormList();
+            },
+          );
+        },
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
     );
   }
 }

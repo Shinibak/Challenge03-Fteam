@@ -13,7 +13,9 @@ class MenuBarWidget extends StatelessWidget {
       width: screenSize,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(screenSize * 0.101),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(screenSize * 0.101),
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,6 +37,7 @@ class MenuBarWidget extends StatelessWidget {
                         MenuButtonWidget(
                           icon: menuList[index].icon,
                           active: menuList[index].active,
+                          screenSize: screenSize,
                         ),
                         if (index < menuList.length - 1)
                           SizedBox(width: screenSize * 0.042)

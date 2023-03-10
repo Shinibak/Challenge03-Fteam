@@ -1,6 +1,7 @@
 import 'package:challenge03_fteam/src/models/profile_modal.dart';
-import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'incoming_message_widget.dart';
+import 'sent_message_widget.dart';
 
 class ChatListWidget extends StatelessWidget {
   final ProfileModal profile;

@@ -2,6 +2,7 @@ import 'package:design_system/src/themes/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 ThemeData get darkTheme => ThemeData(
+  useMaterial3: true,
       primaryColor: const Color.fromARGB(255, 68, 68, 68),
       scaffoldBackgroundColor: const Color.fromARGB(255, 68, 68, 68),
       iconTheme: const IconThemeData(color: Colors.white),

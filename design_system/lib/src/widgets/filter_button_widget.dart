@@ -8,6 +8,7 @@ class FilterButtonWidget extends StatefulWidget {
   final IconData icon;
   final int notifications;
   final bool active;
+  final double screenSize;
 
   const FilterButtonWidget({
     super.key,
@@ -15,6 +16,7 @@ class FilterButtonWidget extends StatefulWidget {
     required this.icon,
     required this.notifications,
     required this.active,
+    required this.screenSize,
   });
 
   @override
@@ -71,6 +73,7 @@ class _FilterButtonWidgetState extends State<FilterButtonWidget> {
             NotificationWidget(
               notification: widget.notifications,
               activeNotification: wasPressed,
+              screenSize: screenSize,
             ),
             SizedBox(
               width: screenSize * 0.053,

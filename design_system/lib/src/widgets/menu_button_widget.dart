@@ -5,7 +5,8 @@ import '../themes/theme_extensions.dart';
 class MenuButtonWidget extends StatefulWidget {
   final IconData icon;
   final bool active;
-  const MenuButtonWidget({super.key, required this.icon, required this.active});
+  final double screenSize;
+  const MenuButtonWidget({super.key, required this.icon, required this.active, required this.screenSize,});
 
   @override
   State<MenuButtonWidget> createState() => _MenuButtonWidgetState();
@@ -16,14 +17,13 @@ class _MenuButtonWidgetState extends State<MenuButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
 
     return Container(
-      height: screenSize * 0.133,
-      width: screenSize * 0.133,
+      height: widget.screenSize * 0.133,
+      width: widget.screenSize * 0.133,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(screenSize * 0.04),
+        borderRadius: BorderRadius.circular(widget.screenSize * 0.04),
         color: wasPressed ? theme.buttonColorOn : theme.buttonColorOff,
       ),
       child: GestureDetector(
@@ -39,7 +39,7 @@ class _MenuButtonWidgetState extends State<MenuButtonWidget> {
             widget.icon,
             color:
                 wasPressed ? theme.buttonIconColorOn : theme.buttonIconColorOff,
-            size: screenSize * 0.058,
+            size: widget.screenSize * 0.058,
           ),
         ),
       ),

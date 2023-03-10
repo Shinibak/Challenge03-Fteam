@@ -1,7 +1,6 @@
 import 'package:challenge03_fteam/src/mockup/profile_buttons_data.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import '../models/profile_button_modal.dart';
 import '../models/profile_modal.dart';
 
 class ProfileCardWidget extends StatelessWidget {
@@ -47,7 +46,10 @@ class ProfileCardWidget extends StatelessWidget {
               SizedBox(width: screenSize * 0.309),
               Padding(
                 padding: EdgeInsets.only(top: screenSize * 0.0053),
-                child: AvatarTodoListWidget(avatarImage: profile.avatarImage),
+                child: AvatarTodoListWidget(
+                  avatarImage: profile.avatarImage,
+                  screenSize: screenSize,
+                ),
               ),
               SizedBox(width: screenSize * 0.224),
               Icon(
@@ -66,7 +68,10 @@ class ProfileCardWidget extends StatelessWidget {
                 style: textStyle.bodyText1,
               ),
               SizedBox(width: screenSize * 0.0106),
-              OnlineStatusWidget(isOnline: profile.online),
+              OnlineStatusWidget(
+                isOnline: profile.isOnline,
+                screenSize: screenSize,
+              ),
             ],
           ),
           SizedBox(height: screenSize * 0.037),
@@ -96,6 +101,7 @@ class ProfileCardWidget extends StatelessWidget {
                       child: ProfileButtonsWidget(
                         icon: listButtonsProfile[index].icon,
                         active: listButtonsProfile[index].active,
+                        screenSize: screenSize,
                       ),
                     );
                   },
@@ -136,11 +142,13 @@ class ProfileCardWidget extends StatelessWidget {
               ProfileSkillsWidget(
                 backgroundColor: colors.uiUxColor,
                 title: 'UI/UX Designer',
+                screenSize: screenSize,
               ),
               SizedBox(width: screenSize * 0.026),
               ProfileSkillsWidget(
                 backgroundColor: colors.projectManagerColor,
                 title: 'Project Manager',
+                screenSize: screenSize,
               ),
             ],
           ),
@@ -151,16 +159,19 @@ class ProfileCardWidget extends StatelessWidget {
               ProfileSkillsWidget(
                 backgroundColor: colors.qaColor,
                 title: 'QA',
+                screenSize: screenSize,
               ),
               SizedBox(width: screenSize * 0.026),
               ProfileSkillsWidget(
                 backgroundColor: colors.seoColor,
                 title: 'SEO',
+                screenSize: screenSize,
               ),
               SizedBox(width: screenSize * 0.026),
               ProfileSkillsWidget(
                 backgroundColor: colors.javaColor,
                 title: 'Java Script Developer',
+                screenSize: screenSize,
               ),
             ],
           ),

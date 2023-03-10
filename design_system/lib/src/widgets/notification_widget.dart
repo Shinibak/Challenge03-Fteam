@@ -4,15 +4,16 @@ import '../themes/theme_extensions.dart';
 class NotificationWidget extends StatelessWidget {
   final int notification;
   final bool activeNotification;
+  final double screenSize;
   const NotificationWidget({
     super.key,
     required this.notification,
     required this.activeNotification,
+    required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     final textStyle = Theme.of(context).textTheme;
     return Container(

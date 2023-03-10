@@ -5,8 +5,9 @@ import 'check_box_widget.dart';
 class TodoListWidget extends StatefulWidget {
   final String todoItem;
   final String todoData;
+  final double screenSize;
   const TodoListWidget(
-      {super.key, required this.todoItem, required this.todoData});
+      {super.key, required this.todoItem, required this.todoData, required this.screenSize});
 
   @override
   State<TodoListWidget> createState() => _TodoListWidgetState();
@@ -17,17 +18,16 @@ class _TodoListWidgetState extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     return Padding(
-      padding: EdgeInsets.only(bottom: screenSize * 0.0213),
+      padding: EdgeInsets.only(bottom: widget.screenSize * 0.0213),
       child: Container(
-        height: screenSize * 0.170,
-        width: screenSize * 0.901,
+        height: widget.screenSize * 0.170,
+        width: widget.screenSize * 0.901,
         decoration: BoxDecoration(
           color: check ? theme.todoColorOn : theme.todoColorOff,
-          borderRadius: BorderRadius.circular(screenSize * 0.048),
+          borderRadius: BorderRadius.circular(widget.screenSize * 0.048),
         ),
         child: Row(
           children: [
@@ -39,16 +39,16 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                   },
                 );
               },
-              child: CheckBoxWidget(wasCheck: check),
+              child: CheckBoxWidget(wasCheck: check,screenSize: widget.screenSize),
             ),
-            SizedBox(width: screenSize * 0.037),
+            SizedBox(width: widget.screenSize * 0.037),
             Column(
               children: [
                 Text(
                   widget.todoItem,
                   style: textStyle.bodyText2,
                 ),
-                SizedBox(height: screenSize * 0.026),
+                SizedBox(height: widget.screenSize * 0.026),
                 Text(
                   widget.todoData,
                   style: textStyle.overline,
