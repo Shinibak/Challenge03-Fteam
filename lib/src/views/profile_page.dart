@@ -1,7 +1,7 @@
 import 'package:challenge03_fteam/src/widgets/todo_form.dart';
-import 'package:challenge03_fteam/src/widgets/profile_card_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/profile_modal.dart';
+import '../widgets/profile_card_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({

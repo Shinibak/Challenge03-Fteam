@@ -1,6 +1,5 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import '../themes/theme_extensions.dart';
 
 // ignore: camel_case_types
 class ChatPreviewWidget extends StatelessWidget {
@@ -100,7 +99,7 @@ class ChatPreviewWidget extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.notifications_off_outlined,
-                          color: muted ? theme.mutedIcon : Colors.transparent,
+                          color: muted ? theme.mutedIcon : theme.buttonColorOff,
                         ),
                       ],
                     )

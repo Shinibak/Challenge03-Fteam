@@ -16,7 +16,7 @@ class TextBarWidget extends StatelessWidget {
       height: screenSize * 0.154,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.042),
-        color: colors.cinzaEscuro,
+        color: colors.backOpacity,
       ),
       child: Row(
         children: [
@@ -49,6 +49,7 @@ class TextBarWidget extends StatelessWidget {
               child: Icon(
                 CustomIcon.sentIcon,
                 size: screenSize * 0.053,
+                color: colors.back,
               ),
             ),
           ),

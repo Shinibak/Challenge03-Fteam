@@ -6,7 +6,12 @@ class MenuButtonWidget extends StatefulWidget {
   final IconData icon;
   final bool active;
   final double screenSize;
-  const MenuButtonWidget({super.key, required this.icon, required this.active, required this.screenSize,});
+  const MenuButtonWidget({
+    super.key,
+    required this.icon,
+    required this.active,
+    required this.screenSize,
+  });
 
   @override
   State<MenuButtonWidget> createState() => _MenuButtonWidgetState();

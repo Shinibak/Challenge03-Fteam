@@ -14,6 +14,8 @@ class AppBarChatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
+
+    
     return Container(
       height: screenSize * 0.261,
       width: screenSize,

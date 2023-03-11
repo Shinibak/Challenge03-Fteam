@@ -6,8 +6,12 @@ class TodoListWidget extends StatefulWidget {
   final String todoItem;
   final String todoData;
   final double screenSize;
-  const TodoListWidget(
-      {super.key, required this.todoItem, required this.todoData, required this.screenSize});
+  const TodoListWidget({
+    super.key,
+    required this.todoItem,
+    required this.todoData,
+    required this.screenSize,
+  });
 
   @override
   State<TodoListWidget> createState() => _TodoListWidgetState();
@@ -20,6 +24,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
+
     return Padding(
       padding: EdgeInsets.only(bottom: widget.screenSize * 0.0213),
       child: Container(
@@ -39,7 +44,10 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                   },
                 );
               },
-              child: CheckBoxWidget(wasCheck: check,screenSize: widget.screenSize),
+              child: CheckBoxWidget(
+                wasCheck: check,
+                screenSize: widget.screenSize,
+              ),
             ),
             SizedBox(width: widget.screenSize * 0.037),
             Column(

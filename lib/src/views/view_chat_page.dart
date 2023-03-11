@@ -38,6 +38,7 @@ class ViewChatPage extends StatelessWidget {
                     child: ListFilterButtonWidget(filterList: filters),
                   ),
                 ),
+                SizedBox(height: screenSize * 0.058),
                 Expanded(
                   child: ListView.builder(
                     itemCount: filters.length,
@@ -47,6 +48,7 @@ class ViewChatPage extends StatelessWidget {
                         padding: EdgeInsets.only(
                           left: screenSize * 0.048,
                           right: screenSize * 0.048,
+                          bottom: screenSize * 0.069,
                         ),
                         child: ExpandedListWidget(
                           filtersGroup: filters[index].text,

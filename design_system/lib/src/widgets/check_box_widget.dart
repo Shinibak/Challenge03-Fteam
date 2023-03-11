@@ -14,8 +14,8 @@ class CheckBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
-
     final theme = Theme.of(context).extension<ThemeCustom>()!;
+
     return Container(
       height: screenSize * 0.106,
       width: screenSize * 0.106,
@@ -28,12 +28,12 @@ class CheckBoxWidget extends StatelessWidget {
         width: screenSize * 0.101,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(screenSize * 0.026),
-          color: wasCheck ? theme.buttonColorOn : theme.todoColorOff,
+          color: wasCheck ? theme.buttonColorOn : theme.todoColorOn,
         ),
         child: Center(
           child: Icon(
             Icons.check,
-            color: wasCheck ? Colors.black : theme.buttonColorOff,
+            color: wasCheck ? theme.todoColorOn : theme.buttonColorOff,
             size: screenSize * 0.042,
           ),
         ),

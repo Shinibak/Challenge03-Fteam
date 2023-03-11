@@ -89,35 +89,47 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                 heightFactor: heightFactoAnimation.value,
                 alignment: Alignment.topLeft,
                 child: SizedBox(
-                  height: profileList.length * (screenSize * 0.186),
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: profileList.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/two',
-                            arguments: profileList[index],
-                          );
-                        },
-                        child: ChatPreviewWidget(
-                          notifications: profileList[index].notifications,
-                          avatarImage: profileList[index].avatarImage,
-                          name: profileList[index].name,
-                          number: profileList[index].number,
-                          lastMessageData:
-                              profileList[index].messages.last.hour,
-                          lastMessage:
-                              profileList[index].messages.last.message.last,
-                          muted: profileList[index].isMuted,
-                          online: profileList[index].isOnline,
-                          screenSize: screenSize,
-                        ),
-                      );
-                    },
+                  height: (screenSize * 0.048) +
+                      ((profileList.length - 1) * (screenSize * 0.261)) +
+                      (screenSize * 0.186),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: screenSize * 0.048),
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: profileList.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/two',
+                              arguments: profileList[index],
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              bottom: index < profileList.length - 1
+                                  ? screenSize * 0.074
+                                  : 0,
+                            ),
+                            child: ChatPreviewWidget(
+                              notifications: profileList[index].notifications,
+                              avatarImage: profileList[index].avatarImage,
+                              name: profileList[index].name,
+                              number: profileList[index].number,
+                              lastMessageData:
+                                  profileList[index].messages.last.hour,
+                              lastMessage:
+                                  profileList[index].messages.last.message.last,
+                              muted: profileList[index].isMuted,
+                              online: profileList[index].isOnline,
+                              screenSize: screenSize,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
