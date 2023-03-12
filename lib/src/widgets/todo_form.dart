@@ -21,6 +21,40 @@ class _TodoFormListState extends State<TodoFormList> {
     dateReservado = dateTime;
   }
 
+  Future<DateTime?> pickDate() => showDatePicker(
+        context: context,
+        initialDate: dateTime,
+        firstDate: dateReservado,
+        lastDate: DateTime(3000),
+      );
+
+  Future<TimeOfDay?> pickTime() => showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(
+          hour: dateTime.hour,
+          minute: dateTime.minute,
+        ),
+      );
+
+  void validarData() {
+    final valiDate = DateTime.now();
+    if (dateTime.year == valiDate.year &&
+        dateTime.month == valiDate.month &&
+        dateTime.day == valiDate.day) {
+      if (dateTime.hour <= valiDate.hour) {
+        if (dateTime.minute <= valiDate.minute) {
+          debugPrint('invalido');
+        } else {
+          debugPrint(' validado');
+        }
+      } else {
+        debugPrint(' validado');
+      }
+    } else {
+      debugPrint(' validado');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final hours = dateTime.hour.toString().padLeft(2, '0');
@@ -88,6 +122,7 @@ class _TodoFormListState extends State<TodoFormList> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {}
+                  validarData();
                 },
                 child: const Text('Submit'),
               ),
@@ -97,19 +132,4 @@ class _TodoFormListState extends State<TodoFormList> {
       ),
     );
   }
-
-  Future<DateTime?> pickDate() => showDatePicker(
-        context: context,
-        initialDate: dateTime,
-        firstDate: dateReservado,
-        lastDate: DateTime(3000),
-      );
-
-  Future<TimeOfDay?> pickTime() => showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(
-          hour: dateTime.hour,
-          minute: dateTime.minute,
-        ),
-      );
 }
