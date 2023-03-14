@@ -39,10 +39,13 @@ class ProfileCardWidget extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(top: screenSize * 0.016),
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: screenSize * 0.042,
-                  color: Theme.of(context).iconTheme.color,
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: screenSize * 0.042,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
                 ),
               ),
               SizedBox(width: screenSize * 0.309),

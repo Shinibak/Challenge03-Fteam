@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   dynamic_color: ^1.4.0
+  flutter_slidable: ^2.0.0
   
 
 dev_dependencies:

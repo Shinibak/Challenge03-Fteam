@@ -14,4 +14,5 @@ class MyColors {
   final Color receivedMsg = const Color(0xff15161a);
   final Color backOpacity = Colors.black.withOpacity(0.7);
   final Color back = Colors.black;
+  final Color deleted = Colors.red;
 }

@@ -19,3 +19,4 @@ export 'src/widgets/online_status_widget.dart';
 export 'src/widgets/profile_button_widget.dart';
 export 'src/widgets/search_widget.dart';
 export 'src/widgets/text_bar_widget.dart';
+export 'src/widgets/todo_item_widget.dart';

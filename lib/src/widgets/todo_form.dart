@@ -1,30 +1,39 @@
+// ignore_for_file: must_be_immutable
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class TodoFormList extends StatefulWidget {
-  const TodoFormList({super.key});
+  Function(DateTime, String)? onRefreshScreen;
+
+  TodoFormList({
+    super.key,
+    required this.onRefreshScreen,
+  });
 
   @override
   State<TodoFormList> createState() => _TodoFormListState();
 }
 
 class _TodoFormListState extends State<TodoFormList> {
+  final taskController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController taskController = TextEditingController();
-  // DateTime dateTime = DateTime(2023, 12, 23, 5, 45);
+  final colors = MyColors();
   late DateTime dateTime;
-  late final dateReservado;
+  late final dateReserved;
+  bool validate = true;
 
   @override
   void initState() {
-    super.initState();
     dateTime = DateTime.now();
-    dateReservado = dateTime;
+    dateReserved = dateTime;
+
+    super.initState();
   }
 
   Future<DateTime?> pickDate() => showDatePicker(
         context: context,
         initialDate: dateTime,
-        firstDate: dateReservado,
+        firstDate: dateReserved,
         lastDate: DateTime(3000),
       );
 
@@ -36,23 +45,25 @@ class _TodoFormListState extends State<TodoFormList> {
         ),
       );
 
-  void validarData() {
+  bool? validatorData() {
     final valiDate = DateTime.now();
     if (dateTime.year == valiDate.year &&
         dateTime.month == valiDate.month &&
         dateTime.day == valiDate.day) {
       if (dateTime.hour <= valiDate.hour) {
         if (dateTime.minute <= valiDate.minute) {
-          debugPrint('invalido');
+          setState(() {
+            validate = false;
+          });
+          return false;
         } else {
-          debugPrint(' validado');
+          return true;
         }
       } else {
-        debugPrint(' validado');
+        return true;
       }
-    } else {
-      debugPrint(' validado');
     }
+    return true;
   }
 
   @override
@@ -61,74 +72,102 @@ class _TodoFormListState extends State<TodoFormList> {
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
     return Container(
-      height: 200,
       color: Colors.amber,
-      child: Center(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                controller: taskController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Center(
+            child: Form(
+              key: _formKey,
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      final date = await pickDate();
-                      if (date == null) return;
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: taskController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final date = await pickDate();
+                          if (date == null) return;
 
-                      final newDateTime = DateTime(
-                        date.year,
-                        date.month,
-                        date.day,
-                        dateTime.hour,
-                        dateTime.minute,
-                      );
+                          final newDateTime = DateTime(
+                            date.year,
+                            date.month,
+                            date.day,
+                            dateTime.hour,
+                            dateTime.minute,
+                          );
 
-                      setState(() => dateTime = newDateTime);
-                    },
-                    child: Text(
-                      '${dateTime.year}/${dateTime.month}/${dateTime.day}',
-                    ),
+                          setState(() => dateTime = newDateTime);
+                        },
+                        child: Text(
+                          '${dateTime.year}/${dateTime.month}/${dateTime.day}',
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final time = await pickTime();
+
+                          if (time == null) return;
+
+                          final newDateTime = DateTime(
+                            dateTime.year,
+                            dateTime.month,
+                            dateTime.day,
+                            time.hour,
+                            time.minute,
+                          );
+                          setState(() => dateTime = newDateTime);
+                        },
+                        child: Text(
+                          '$hours:$minutes',
+                          style: TextStyle(
+                            color: validate
+                                ? colors.profileButton
+                                : colors.deleted,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final time = await pickTime();
-
-                      if (time == null) return;
-
-                      final newDateTime = DateTime(
-                        dateTime.year,
-                        dateTime.month,
-                        dateTime.day,
-                        time.hour,
-                        time.minute,
-                      );
-                      setState(() => dateTime = newDateTime);
-                    },
-                    child: Text('$hours:$minutes'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate() == true &&
+                              validatorData() == true) {
+                            widget.onRefreshScreen!(
+                              dateTime,
+                              taskController.text,
+                            );
+                            Navigator.pop(context);
+                          } else if (validatorData() == false) {}
+                        },
+                        child: const Text('Save'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Cancel'),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {}
-                  validarData();
-                },
-                child: const Text('Submit'),
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

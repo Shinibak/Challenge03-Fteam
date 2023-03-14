@@ -1,69 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import '../themes/colors.dart';
 import '../themes/theme_extensions.dart';
-import 'check_box_widget.dart';
 
-class TodoListWidget extends StatefulWidget {
-  final String todoItem;
-  final String todoData;
+class TodoItemWidget extends StatelessWidget {
+  final String taskName;
+  final DateTime todoData;
   final double screenSize;
-  const TodoListWidget({
+  final bool taskCompleted;
+  Function(bool?)? onChanged;
+  Function(BuildContext)? deletedFunction;
+
+  TodoItemWidget({
     super.key,
-    required this.todoItem,
+    required this.taskName,
     required this.todoData,
     required this.screenSize,
+    required this.taskCompleted,
+    required this.onChanged,
+    required this.deletedFunction,
   });
-
-  @override
-  State<TodoListWidget> createState() => _TodoListWidgetState();
-}
-
-class _TodoListWidgetState extends State<TodoListWidget> {
-  bool check = false;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
+    final colors = MyColors();
+    late final String period;
+    if (todoData.hour > 12) {
+      period = 'PM';
+    } else {
+      period = 'AM';
+    }
 
-    return Padding(
-      padding: EdgeInsets.only(bottom: widget.screenSize * 0.0213),
+    return Slidable(
+      endActionPane: ActionPane(
+        motion: const StretchMotion(),
+        children: [
+          SlidableAction(
+            onPressed: deletedFunction,
+            icon: Icons.delete,
+            backgroundColor: colors.deleted,
+          ),
+        ],
+      ),
       child: Container(
-        height: widget.screenSize * 0.170,
-        width: widget.screenSize * 0.901,
+        height: screenSize * 0.170,
+        width: screenSize * 0.901,
         decoration: BoxDecoration(
-          color: check ? theme.todoColorOn : theme.todoColorOff,
-          borderRadius: BorderRadius.circular(widget.screenSize * 0.048),
+          color: taskCompleted ? theme.todoColorOn : theme.todoColorOff,
+          borderRadius: BorderRadius.circular(screenSize * 0.048),
         ),
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                setState(
-                  () {
-                    check = !check;
-                  },
-                );
-              },
-              child: CheckBoxWidget(
-                wasCheck: check,
-                screenSize: widget.screenSize,
+        child: Padding(
+          padding: EdgeInsets.only(top: screenSize * 0.032),
+          child: Row(
+            children: [
+              SizedBox(width: screenSize * 0.032),
+              Checkbox(
+                value: taskCompleted,
+                onChanged: onChanged,
+                activeColor: theme.buttonColorOn,
+                
               ),
-            ),
-            SizedBox(width: widget.screenSize * 0.037),
-            Column(
-              children: [
-                Text(
-                  widget.todoItem,
-                  style: textStyle.bodyText2,
-                ),
-                SizedBox(height: widget.screenSize * 0.026),
-                Text(
-                  widget.todoData,
-                  style: textStyle.overline,
-                ),
-              ],
-            ),
-          ],
+              SizedBox(width: screenSize * 0.037),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    taskName,
+                    style: textStyle.bodyText2,
+                  ),
+                  SizedBox(height: screenSize * 0.026),
+                  Text(
+                    '${todoData.day}/${todoData.month}/${todoData.year} ${todoData.hour}:${todoData.minute} $period',
+                    style: textStyle.overline,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
