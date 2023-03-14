@@ -3,10 +3,10 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class ExpandedListWidget extends StatefulWidget {
-  final String filtersGroup;
+  final String Group;
   final bool active;
   const ExpandedListWidget(
-      {super.key, required this.filtersGroup, required this.active});
+      {super.key, required this.Group, required this.active});
 
   @override
   State<ExpandedListWidget> createState() => _ExpandedListWidgetState();
@@ -17,6 +17,8 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
   late final AnimationController controller;
   late final Animation<double> rotationAnimation;
   late final Animation<double> heightFactoAnimation;
+  late bool wasPassed = widget.active;
+  final profileList = profilesDataList;
 
   @override
   void initState() {
@@ -35,6 +37,11 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
       begin: 0.0,
       end: 1.0,
     ).animate(controller);
+    if (wasPassed) {
+      controller.forward();
+    } else {
+      controller.reverse();
+    }
   }
 
   @override
@@ -42,9 +49,6 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
     controller.dispose();
     super.dispose();
   }
-
-  late bool wasPassed = widget.active;
-  final profileList = profilesDataList;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,7 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                 children: [
                   Expanded(
                     child: Text(
-                      widget.filtersGroup,
+                      widget.Group,
                       style: textStyle.subtitle2,
                     ),
                   ),

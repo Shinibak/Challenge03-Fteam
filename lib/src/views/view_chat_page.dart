@@ -2,7 +2,7 @@ import 'package:challenge03_fteam/src/mockup/filters_data.dart';
 import 'package:challenge03_fteam/src/widgets/expanded_list_widget.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-
+import '../mockup/groups_data.dart';
 import '../mockup/menu_buttons_data.dart';
 import '../widgets/list_filter_button_widget.dart';
 import '../widgets/menu_bar_widget.dart';
@@ -14,6 +14,7 @@ class ViewChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
     final filters = filtersDataList;
+    final groups = groupsDataList;
     final menu = menuButtonsDataList;
 
     return Scaffold(
@@ -41,7 +42,7 @@ class ViewChatPage extends StatelessWidget {
                 SizedBox(height: screenSize * 0.058),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: filters.length,
+                    itemCount: groups.length,
                     padding: EdgeInsets.zero,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
@@ -51,8 +52,8 @@ class ViewChatPage extends StatelessWidget {
                           bottom: screenSize * 0.069,
                         ),
                         child: ExpandedListWidget(
-                          filtersGroup: filters[index].text,
-                          active: filters[index].active,
+                          Group: groups[index].text,
+                          active: groups[index].active,
                         ),
                       );
                     },

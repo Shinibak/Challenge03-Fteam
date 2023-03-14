@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import '../themes/colors.dart';
 import '../themes/theme_extensions.dart';
 
@@ -27,10 +28,45 @@ class TodoItemWidget extends StatelessWidget {
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     final colors = MyColors();
     late final String period;
+    final month = DateFormat('MMM');
+    late DateTime dateTime = DateTime.now();
+    late TextStyle style;
+    late bool validate;
     if (todoData.hour > 12) {
       period = 'PM';
     } else {
       period = 'AM';
+    }
+    if (todoData.minute < dateTime.minute) {
+      if (todoData.hour <= dateTime.hour) {
+        if (todoData.day <= dateTime.day) {
+          if (todoData.month <= dateTime.month) {
+            if (todoData.year <= dateTime.year) {
+              validate = true;
+            } else {
+              validate = false;
+            }
+          } else {
+            validate = false;
+          }
+        } else {
+          validate = false;
+        }
+      } else {
+        validate = false;
+      }
+    } else {
+      validate = false;
+    }
+
+    if (validate) {
+      if (taskCompleted) {
+        style = textStyle.overline!;
+      } else {
+        style = theme.lateStyle!;
+      }
+    } else {
+      style = textStyle.overline!;
     }
 
     return Slidable(
@@ -60,7 +96,6 @@ class TodoItemWidget extends StatelessWidget {
                 value: taskCompleted,
                 onChanged: onChanged,
                 activeColor: theme.buttonColorOn,
-                
               ),
               SizedBox(width: screenSize * 0.037),
               Column(
@@ -72,8 +107,8 @@ class TodoItemWidget extends StatelessWidget {
                   ),
                   SizedBox(height: screenSize * 0.026),
                   Text(
-                    '${todoData.day}/${todoData.month}/${todoData.year} ${todoData.hour}:${todoData.minute} $period',
-                    style: textStyle.overline,
+                    '${month.format(todoData)} ${todoData.day}, ${todoData.year} ${todoData.hour}:${todoData.minute} $period',
+                    style: style,
                   ),
                 ],
               ),
