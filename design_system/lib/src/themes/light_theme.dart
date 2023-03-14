@@ -35,6 +35,7 @@ ThemeData get lightTheme => ThemeData(
           mutedIcon: Colors.red,
           todoColorOn: Colors.blueAccent,
           todoColorOff: const Color.fromARGB(255, 9, 111, 194),
+          lateStyle: const TextStyle(fontSize: 10, color: Colors.red),
         ),
       ],
     );

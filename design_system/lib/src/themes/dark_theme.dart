@@ -37,6 +37,7 @@ ThemeData get darkTheme => ThemeData(
           mutedIcon: Colors.grey,
           todoColorOn: const Color(0xff000000),
           todoColorOff: const Color(0xff16171b),
+          lateStyle: const TextStyle(fontSize: 10, color: Colors.red),
         ),
       ],
     );

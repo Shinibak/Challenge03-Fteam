@@ -18,7 +18,6 @@ class ProfileCardWidget extends StatelessWidget {
     final listButtonsProfile = profileButtonsData;
 
     return Container(
-      height: screenSize * 1.157,
       width: screenSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -27,6 +26,7 @@ class ProfileCardWidget extends StatelessWidget {
         color: colors.profileCardTheme,
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: screenSize * 0.133),
@@ -135,50 +135,48 @@ class ProfileCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: screenSize * 0.026),
+          SizedBox(height: screenSize * 0.026),
           Text(
             'Our company are looking for:',
             style: textStyle.subtitle2,
           ),
-          SizedBox(width: screenSize * 0.037),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ProfileSkillsWidget(
-                backgroundColor: colors.uiUxColor,
-                title: 'UI/UX Designer',
-                screenSize: screenSize,
-              ),
-              SizedBox(width: screenSize * 0.026),
-              ProfileSkillsWidget(
-                backgroundColor: colors.projectManagerColor,
-                title: 'Project Manager',
-                screenSize: screenSize,
-              ),
-            ],
+          SizedBox(height: screenSize * 0.037),
+          SizedBox(
+            width: screenSize * 0.816,
+            child: Wrap(
+              spacing: screenSize * 0.02,
+              runSpacing: screenSize * 0.021,
+              children: [
+                ProfileSkillsWidget(
+                  backgroundColor: colors.uiUxColor,
+                  title: 'UI/UX Designer',
+                  screenSize: screenSize,
+                ),
+                ProfileSkillsWidget(
+                  backgroundColor: colors.projectManagerColor,
+                  title: 'Project Manager',
+                  screenSize: screenSize,
+                ),
+                ProfileSkillsWidget(
+                  backgroundColor: colors.qaColor,
+                  title: 'QA',
+                  screenSize: screenSize,
+                ),
+                ProfileSkillsWidget(
+                  backgroundColor: colors.seoColor,
+                  title: 'SEO',
+                  screenSize: screenSize,
+                ),
+                ProfileSkillsWidget(
+                  backgroundColor: colors.javaColor,
+                  title: 'Java Script Developer',
+                  screenSize: screenSize,
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: screenSize * 0.0213),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ProfileSkillsWidget(
-                backgroundColor: colors.qaColor,
-                title: 'QA',
-                screenSize: screenSize,
-              ),
-              SizedBox(width: screenSize * 0.026),
-              ProfileSkillsWidget(
-                backgroundColor: colors.seoColor,
-                title: 'SEO',
-                screenSize: screenSize,
-              ),
-              SizedBox(width: screenSize * 0.026),
-              ProfileSkillsWidget(
-                backgroundColor: colors.javaColor,
-                title: 'Java Script Developer',
-                screenSize: screenSize,
-              ),
-            ],
+          SizedBox(
+            height: screenSize * 0.074,
           ),
         ],
       ),

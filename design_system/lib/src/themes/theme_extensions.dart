@@ -12,6 +12,7 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
   final Color? mutedIcon;
   final Color? todoColorOn;
   final Color? todoColorOff;
+    final TextStyle? lateStyle;
 
   ThemeCustom({
     required this.buttonTextOnStyle,
@@ -25,6 +26,7 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
     required this.mutedIcon,
     required this.todoColorOn,
     required this.todoColorOff,
+    required this.lateStyle,
   });
 
   @override
@@ -40,6 +42,7 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
     Color? mutedIcon,
     Color? todoColorOn,
      Color? todoColorOff,
+     TextStyle? lateStyle
   ]) {
     return ThemeCustom(
       buttonTextOnStyle: buttonTextOnStyle ?? this.buttonTextOnStyle,
@@ -53,6 +56,7 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
       mutedIcon: mutedIcon ?? this.mutedIcon,
       todoColorOn: todoColorOn ?? this.todoColorOn,
        todoColorOff: todoColorOff ?? this.todoColorOff,
+       lateStyle: lateStyle?? this.lateStyle,
     );
   }
 
@@ -107,6 +111,11 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
        todoColorOff: Color.lerp(
         todoColorOn,
         other.todoColorOn,
+        t,
+      ),
+      lateStyle:  TextStyle.lerp(
+        lateStyle,
+        other.lateStyle,
         t,
       ),
     );
