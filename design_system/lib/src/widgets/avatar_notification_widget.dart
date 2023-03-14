@@ -5,11 +5,14 @@ class AvatarNotificationWidget extends StatelessWidget {
   final String avatarImage;
   final int notifications;
   final bool active;
+
+  final double screenSize;
   const AvatarNotificationWidget({
     super.key,
     required this.avatarImage,
     required this.notifications,
     required this.active,
+    required this.screenSize,
   });
 
   @override
@@ -40,6 +43,7 @@ class AvatarNotificationWidget extends StatelessWidget {
           child: NotificationWidget(
             notification: notifications,
             activeNotification: active,
+            screenSize: screenSize,
           ),
         ),
       ],

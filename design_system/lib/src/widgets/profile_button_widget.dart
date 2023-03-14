@@ -6,15 +6,16 @@ import '../themes/theme_extensions.dart';
 class ProfileButtonsWidget extends StatelessWidget {
   final IconData icon;
   final bool active;
+  final double screenSize;
   const ProfileButtonsWidget({
     super.key,
     required this.icon,
     required this.active,
+    required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     final colors = MyColors();
 

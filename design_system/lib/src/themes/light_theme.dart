@@ -34,7 +34,7 @@ ThemeData get lightTheme => ThemeData(
           buttonIconColorOff: Colors.black,
           mutedIcon: Colors.red,
           todoColorOn: Colors.blueAccent,
-          todoColorOff: const Color.fromARGB(255, 9, 111, 194)
+          todoColorOff: const Color.fromARGB(255, 9, 111, 194),
         ),
       ],
     );

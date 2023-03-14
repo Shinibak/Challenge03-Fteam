@@ -7,6 +7,7 @@ class ListFilterButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size.width;
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: filterList.length,
@@ -16,7 +17,7 @@ class ListFilterButtonWidget extends StatelessWidget {
           icon: filterList[index].icon,
           notifications: filterList[index].notifications,
           active: filterList[index].active,
-
+          screenSize: screenSize,
         );
       },
     );

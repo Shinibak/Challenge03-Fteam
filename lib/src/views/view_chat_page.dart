@@ -4,6 +4,8 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 import '../mockup/menu_buttons_data.dart';
+import '../widgets/list_filter_button_widget.dart';
+import '../widgets/menu_bar_widget.dart';
 
 class ViewChatPage extends StatelessWidget {
   const ViewChatPage({super.key});
@@ -23,7 +25,7 @@ class ViewChatPage extends StatelessWidget {
                 SizedBox(
                   height: screenSize * 0.122,
                 ),
-                const SearchWidget(),
+                SearchWidget(screenSize: screenSize),
                 SizedBox(
                   height: screenSize * 0.042,
                 ),
@@ -36,14 +38,17 @@ class ViewChatPage extends StatelessWidget {
                     child: ListFilterButtonWidget(filterList: filters),
                   ),
                 ),
+                SizedBox(height: screenSize * 0.058),
                 Expanded(
                   child: ListView.builder(
                     itemCount: filters.length,
+                    padding: EdgeInsets.zero,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: EdgeInsets.only(
                           left: screenSize * 0.048,
                           right: screenSize * 0.048,
+                          bottom: screenSize * 0.069,
                         ),
                         child: ExpandedListWidget(
                           filtersGroup: filters[index].text,

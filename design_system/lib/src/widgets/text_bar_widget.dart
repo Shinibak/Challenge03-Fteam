@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import '../../design_system.dart';
 
 class TextBarWidget extends StatelessWidget {
-  const TextBarWidget({super.key});
+  final double screenSize;
+  const TextBarWidget({super.key, required this.screenSize});
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
-    final textStyle = Theme.of(context).textTheme;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     final iconColor = Theme.of(context).iconTheme.color;
     final colors = MyColors();
@@ -17,7 +16,7 @@ class TextBarWidget extends StatelessWidget {
       height: screenSize * 0.154,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.042),
-        color: colors.cinzaEscuro,
+        color: colors.backOpacity,
       ),
       child: Row(
         children: [
@@ -50,6 +49,7 @@ class TextBarWidget extends StatelessWidget {
               child: Icon(
                 CustomIcon.sentIcon,
                 size: screenSize * 0.053,
+                color: colors.back,
               ),
             ),
           ),

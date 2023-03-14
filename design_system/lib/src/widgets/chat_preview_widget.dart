@@ -1,6 +1,5 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import '../themes/theme_extensions.dart';
 
 // ignore: camel_case_types
 class ChatPreviewWidget extends StatelessWidget {
@@ -11,6 +10,8 @@ class ChatPreviewWidget extends StatelessWidget {
   final String lastMessage;
   final bool muted;
   final int notifications;
+  final bool online;
+  final double screenSize;
   const ChatPreviewWidget({
     super.key,
     required this.notifications,
@@ -20,11 +21,12 @@ class ChatPreviewWidget extends StatelessWidget {
     required this.lastMessageData,
     required this.lastMessage,
     required this.muted,
+    required this.online,
+    required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     final text = Theme.of(context).textTheme;
 
@@ -37,6 +39,7 @@ class ChatPreviewWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AvatarNotificationWidget(
+                screenSize: screenSize,
                 avatarImage: avatarImage,
                 notifications: notifications,
                 active: true,
@@ -52,9 +55,19 @@ class ChatPreviewWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      name,
-                      style: text.bodyText2,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          name,
+                          style: text.bodyText2,
+                        ),
+                        SizedBox(width: screenSize * 0.016),
+                        OnlineStatusWidget(
+                          isOnline: online,
+                          screenSize: screenSize,
+                        ),
+                      ],
                     ),
                     Text(
                       lastMessageData,
@@ -86,7 +99,7 @@ class ChatPreviewWidget extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.notifications_off_outlined,
-                          color: muted ? theme.mutedIcon : Colors.transparent,
+                          color: muted ? theme.mutedIcon : theme.buttonColorOff,
                         ),
                       ],
                     )

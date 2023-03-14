@@ -35,10 +35,12 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
       begin: 0.0,
       end: 1.0,
     ).animate(controller);
+  }
 
-    controller.addListener(() {
-      setState(() {});
-    });
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   late bool wasPassed = widget.active;
@@ -47,67 +49,94 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            wasPassed = !wasPassed;
-            if (wasPassed) {
-              controller.forward();
-            } else {
-              controller.reverse();
-            }
-          },
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: screenSize * 0.058,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(widget.filtersGroup),
-                RotationTransition(
-                  turns: rotationAnimation,
-                  child: const Icon(Icons.expand_more),
-                ),
-              ],
-            ),
-          ),
-        ),
-        ClipRRect(
-          child: Align(
-            heightFactor: heightFactoAnimation.value,
-            alignment: Alignment.topLeft,
-            child: SizedBox(
-              height: profileList.length * (screenSize * 0.186),
-              child: ListView.builder(
-                itemCount: profileList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/two',
-                        arguments: profileList[index],
-                      );
-                    },
-                    child: ChatPreviewWidget(
-                      notifications: profileList[index].notifications,
-                      avatarImage: profileList[index].avatarImage,
-                      name: profileList[index].name,
-                      number: profileList[index].number,
-                      lastMessageData: profileList[index].messages.last.hour,
-                      lastMessage:
-                          profileList[index].messages.last.message.last,
-                      muted: profileList[index].muted,
+    final textStyle = Theme.of(context).textTheme;
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: () {
+                wasPassed = !wasPassed;
+                if (wasPassed) {
+                  controller.forward();
+                } else {
+                  controller.reverse();
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.filtersGroup,
+                      style: textStyle.subtitle2,
                     ),
-                  );
-                },
+                  ),
+                  RotationTransition(
+                    turns: rotationAnimation,
+                    child: Icon(
+                      Icons.expand_more,
+                      size: screenSize * 0.037,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ),
-      ],
+            ClipRRect(
+              child: Align(
+                heightFactor: heightFactoAnimation.value,
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                  height: (screenSize * 0.048) +
+                      ((profileList.length - 1) * (screenSize * 0.261)) +
+                      (screenSize * 0.186),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: screenSize * 0.048),
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: profileList.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/two',
+                              arguments: profileList[index],
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              bottom: index < profileList.length - 1
+                                  ? screenSize * 0.074
+                                  : 0,
+                            ),
+                            child: ChatPreviewWidget(
+                              notifications: profileList[index].notifications,
+                              avatarImage: profileList[index].avatarImage,
+                              name: profileList[index].name,
+                              number: profileList[index].number,
+                              lastMessageData:
+                                  profileList[index].messages.last.hour,
+                              lastMessage:
+                                  profileList[index].messages.last.message.last,
+                              muted: profileList[index].isMuted,
+                              online: profileList[index].isOnline,
+                              screenSize: screenSize,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

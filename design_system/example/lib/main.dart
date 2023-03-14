@@ -8,6 +8,7 @@ void main() {
 
 class HotReloadWidgetbook extends StatelessWidget {
   const HotReloadWidgetbook({super.key});
+  final double screenSize = 375;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +35,20 @@ class HotReloadWidgetbook extends StatelessWidget {
               name: 'notification Box',
               useCases: [
                 WidgetbookUseCase(
-                  name: 'notification',
-                  builder: (context) => const NotificationWidget(
-                      activeNotification: true, notification: 34),
+                  name: 'selected',
+                  builder: (context) => NotificationWidget(
+                    activeNotification: true,
+                    notification: 34,
+                    screenSize: screenSize,
+                  ),
+                ),
+                WidgetbookUseCase(
+                  name: 'unselected',
+                  builder: (context) => NotificationWidget(
+                    activeNotification: false,
+                    notification: 34,
+                    screenSize: screenSize,
+                  ),
                 ),
               ],
             ),
@@ -45,11 +57,12 @@ class HotReloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'selected Filter',
-                  builder: (context) => const FilterButtonWidget(
+                  builder: (context) => FilterButtonWidget(
                     text: 'All',
                     icon: CustomIcon.archiveIcon,
                     notifications: 35,
                     active: false,
+                    screenSize: screenSize,
                   ),
                 ),
               ],
@@ -59,9 +72,10 @@ class HotReloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'Button',
-                  builder: (context) => const MenuButtonWidget(
+                  builder: (context) => MenuButtonWidget(
                     icon: CustomIcon.chatBoxIcon,
                     active: true,
+                    screenSize: screenSize,
                   ),
                 ),
               ],
@@ -71,23 +85,9 @@ class HotReloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'search',
-                  builder: (context) => const SearchWidget(),
-                ),
-              ],
-            ),
-            WidgetbookComponent(
-              name: 'chat Preview message',
-              useCases: [
-                WidgetbookUseCase(
-                  name: 'example',
-                  builder: (context) => const ChatPreviewWidget(
-                      avatarImage: 'assets/avatar/avatar.png',
-                      lastMessage: 'potato',
-                      lastMessageData: '12:23',
-                      muted: true,
-                      name: 'Raphael',
-                      number: '(12) 23456-5656',
-                      notifications: 34),
+                  builder: (context) => SearchWidget(
+                    screenSize: screenSize,
+                  ),
                 ),
               ],
             ),
@@ -96,31 +96,17 @@ class HotReloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'send',
-                  builder: (context) =>
-                      const MessageSentWidget(message: 'batata'),
+                  builder: (context) => MessageSentWidget(
+                    message: 'batata',
+                    screenSize: screenSize,
+                  ),
                 ),
                 WidgetbookUseCase(
                   name: 'received',
-                  builder: (context) =>
-                      const MessageReceiveWidget(message: 'batata'),
-                ),
-              ],
-            ),
-            WidgetbookComponent(
-              name: 'chat message completo',
-              useCases: [
-                WidgetbookUseCase(
-                  name: 'send',
-                  builder: (context) => const SentMessageWidget(
-                      hours: '12:00', messages: ['oie', 'batata']),
-                ),
-                WidgetbookUseCase(
-                  name: 'received',
-                  builder: (context) => const IncomingMessageWidget(
-                      hours: '14:20',
-                      messages: ['quer um polistaixon?', 'responde'],
-                      profilePicture: 'assets/avatar/avatar.png',
-                      name: 'Sr. Inacio'),
+                  builder: (context) => MessageReceiveWidget(
+                    message: 'batata',
+                    screenSize: screenSize,
+                  ),
                 ),
               ],
             ),
@@ -129,15 +115,19 @@ class HotReloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'Avatar notifications',
-                  builder: (context) => const AvatarNotificationWidget(
-                      notifications: 23,
-                      active: true,
-                      avatarImage: 'assets/avatar/avatar.png'),
+                  builder: (context) => AvatarNotificationWidget(
+                    notifications: 23,
+                    active: true,
+                    avatarImage: 'assets/avatar/avatar.png',
+                    screenSize: screenSize,
+                  ),
                 ),
                 WidgetbookUseCase(
                   name: 'Avatar Todo List',
-                  builder: (context) => const AvatarTodoListWidget(
-                      avatarImage: 'assets/avatar/avatar.png'),
+                  builder: (context) => AvatarTodoListWidget(
+                    avatarImage: 'assets/avatar/avatar.png',
+                    screenSize: screenSize,
+                  ),
                 ),
               ],
             ),

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../themes/colors.dart';
+
 class MessageReceiveWidget extends StatelessWidget {
+  final double screenSize;
   final String message;
-  const MessageReceiveWidget({super.key, required this.message});
+  const MessageReceiveWidget({
+    super.key,
+    required this.message,
+    required this.screenSize,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
+     final colors = MyColors();
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -19,14 +26,13 @@ class MessageReceiveWidget extends StatelessWidget {
               bottomLeft: Radius.circular(screenSize * 0.042),
               bottomRight: Radius.circular(screenSize * 0.042),
             ),
-            color: const Color.fromARGB(255, 88, 88, 88),
+            color: colors.receivedMsg,
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: screenSize * 0.058),
               Row(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(width: screenSize * 0.048),
                   Text(
@@ -36,7 +42,6 @@ class MessageReceiveWidget extends StatelessWidget {
                   SizedBox(width: screenSize * 0.048),
                 ],
               ),
-              SizedBox(height: screenSize * 0.064),
             ],
           ),
         ),

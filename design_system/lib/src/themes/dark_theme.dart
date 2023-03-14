@@ -2,8 +2,9 @@ import 'package:design_system/src/themes/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 ThemeData get darkTheme => ThemeData(
+      useMaterial3: true,
       primaryColor: const Color.fromARGB(255, 68, 68, 68),
-      scaffoldBackgroundColor: const Color.fromARGB(255, 68, 68, 68),
+      scaffoldBackgroundColor: const Color(0xff1f222a),
       iconTheme: const IconThemeData(color: Colors.white),
       textTheme: const TextTheme(
         headline6: TextStyle(fontSize: 10, color: Colors.white),
@@ -25,17 +26,17 @@ ThemeData get darkTheme => ThemeData(
       ),
       extensions: <ThemeExtension<dynamic>>[
         ThemeCustom(
-          buttonColorOn: Colors.yellow,
+          buttonColorOn: const Color(0xfff1fa88),
           buttonColorOff: Colors.transparent,
-          notificationColorOn: Colors.purple,
+          notificationColorOn: const Color(0xff5650c8),
           notificationColorOff: const Color.fromARGB(255, 80, 80, 80),
           buttonTextOnStyle: const TextStyle(fontSize: 14, color: Colors.black),
           buttonTestOffStyle: const TextStyle(fontSize: 14, color: Colors.grey),
           buttonIconColorOn: Colors.black,
           buttonIconColorOff: Colors.grey,
           mutedIcon: Colors.grey,
-          todoColorOn: const Color.fromARGB(31, 75, 75, 75),
-          todoColorOff: Colors.black,
+          todoColorOn: const Color(0xff000000),
+          todoColorOff: const Color(0xff16171b),
         ),
       ],
     );
