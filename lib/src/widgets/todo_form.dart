@@ -98,25 +98,6 @@ class _TodoFormListState extends State<TodoFormList> {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          final date = await pickDate();
-                          if (date == null) return;
-
-                          final newDateTime = DateTime(
-                            date.year,
-                            date.month,
-                            date.day,
-                            dateTime.hour,
-                            dateTime.minute,
-                          );
-
-                          setState(() => dateTime = newDateTime);
-                        },
-                        child: Text(
-                          '${dateTime.year}/${dateTime.month}/${dateTime.day}',
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
                           final time = await pickTime();
 
                           if (time == null) return;
@@ -137,6 +118,25 @@ class _TodoFormListState extends State<TodoFormList> {
                                 ? colors.profileButton
                                 : colors.deleted,
                           ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final date = await pickDate();
+                          if (date == null) return;
+
+                          final newDateTime = DateTime(
+                            date.year,
+                            date.month,
+                            date.day,
+                            dateTime.hour,
+                            dateTime.minute,
+                          );
+
+                          setState(() => dateTime = newDateTime);
+                        },
+                        child: Text(
+                          '${dateTime.day}/${dateTime.month}/${dateTime.year}',
                         ),
                       ),
                     ],

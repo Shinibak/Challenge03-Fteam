@@ -29,7 +29,7 @@ class TodoItemWidget extends StatelessWidget {
     final colors = MyColors();
     late final String period;
     final month = DateFormat('MMM');
-    late DateTime dateTime = DateTime.now();
+    final dateTime = DateTime.now();
     late TextStyle style;
     late bool validate;
     if (todoData.hour > 12) {
@@ -90,12 +90,21 @@ class TodoItemWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(top: screenSize * 0.032),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: screenSize * 0.032),
-              Checkbox(
-                value: taskCompleted,
-                onChanged: onChanged,
-                activeColor: theme.buttonColorOn,
+              Transform.scale(
+                scale: 1.9,
+                child: Checkbox(
+                  value: taskCompleted,
+                  onChanged: onChanged,
+                  activeColor: theme.buttonColorOn,
+                  checkColor: Colors.black,
+                  side: const BorderSide(
+                    width: 1.5,
+                    color: Color(0xfff1fa88),
+                  ),
+                ),
               ),
               SizedBox(width: screenSize * 0.037),
               Column(

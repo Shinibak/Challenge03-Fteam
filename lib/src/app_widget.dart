@@ -11,7 +11,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Challenge 3 F-Team',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       theme: lightTheme,

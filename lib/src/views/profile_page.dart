@@ -29,15 +29,16 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
+  // ignore: avoid_positional_boolean_parameters
   void checkBoxChanged(bool? value, int index) {
     db.toDoList[index][2] = !db.toDoList[index][2];
     db.updateDataBase();
   }
 
-  void saveNewTask(DateTime date, String Task) {
+  void saveNewTask(DateTime date, String task) {
     db.toDoList.add(
       [
-        Task,
+        task,
         date,
         false,
       ],
