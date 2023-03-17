@@ -141,6 +141,13 @@ class _TodoFormListState extends State<TodoFormList> {
                       ),
                     ],
                   ),
+                  if (validate == false)
+                    Text(
+                      'Hora invalida',
+                      style: TextStyle(
+                        color: colors.deleted,
+                      ),
+                    ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -153,7 +160,7 @@ class _TodoFormListState extends State<TodoFormList> {
                               taskController.text,
                             );
                             Navigator.pop(context);
-                          } else if (validatorData() == false) {}
+                          }
                         },
                         child: const Text('Save'),
                       ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import '../datasource/todo_database.dart';
 import '../models/profile_model.dart';
-import '../widgets/profile_card_widget.dart';
 import '../widgets/todo_form.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -41,11 +40,17 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, child) {
           return Column(
             children: [
-              ProfileCardWidget(profile: profile),
+              ProfileCardWidget(
+                avatarImage: profile.avatarImage,
+                name: profile.name,
+                isOnline: profile.isOnline,
+                number: profile.number,
+                status: profile.status,
+              ),
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(top: screenSize * 0.064),
-                  itemCount: db.toDoList.length,
+                  itemCount: db.returnToDoList().length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.only(
@@ -53,9 +58,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         left: screenSize * 0.048,
                       ),
                       child: TodoItemWidget(
-                        taskName: db.toDoList[index].taskTodo,
-                        date: db.toDoList[index].dateTodo,
-                        taskCompleted: db.toDoList[index].isCompleted,
+                        taskName: db.returnToDoList()[index].taskTodo,
+                        date: db.returnToDoList()[index].dateTodo,
+                        taskCompleted: db.returnToDoList()[index].isCompleted,
                         screenSize: screenSize,
                         onChanged: (value) => db.checkBoxChanged(value, index),
                         deletedFunction: (context) => db.deletedTask(index),

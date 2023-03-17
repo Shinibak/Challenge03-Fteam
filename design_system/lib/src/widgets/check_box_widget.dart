@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
 import '../../design_system.dart';
 
 class CheckBoxWidget extends StatelessWidget {
-  final bool wasCheck;
-  
+  bool wasCheck;
   final double screenSize;
-  const CheckBoxWidget({
+
+  CheckBoxWidget({
     super.key,
-    required this.wasCheck, required this.screenSize,
+    required this.wasCheck,
+    required this.screenSize,
   });
 
   @override
@@ -21,21 +21,17 @@ class CheckBoxWidget extends StatelessWidget {
       width: screenSize * 0.106,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.026),
-        color: theme.buttonColorOn,
-      ),
-      child: Container(
-        height: screenSize * 0.101,
-        width: screenSize * 0.101,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(screenSize * 0.026),
-          color: wasCheck ? theme.buttonColorOn : theme.todoColorOn,
+        color: wasCheck ? theme.buttonColorOn : theme.todoColorOff,
+        border: Border.all(
+          color: theme.buttonColorOn!,
+          width: screenSize * 0.005,
         ),
-        child: Center(
-          child: Icon(
-            Icons.check,
-            color: wasCheck ? theme.todoColorOn : theme.buttonColorOff,
-            size: screenSize * 0.042,
-          ),
+      ),
+      child: Center(
+        child: Icon(
+          Icons.check,
+          color: wasCheck ? theme.todoColorOn : theme.buttonColorOff,
+          size: screenSize * 0.042,
         ),
       ),
     );

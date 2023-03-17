@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'package:challenge03_fteam/src/controllers/todo_put_controller.dart';
 import 'package:challenge03_fteam/src/models/todo_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,10 +12,15 @@ import 'todo_get_datasource.dart';
 import 'todo_put_datasource.dart';
 
 class ToDoDataBase extends ChangeNotifier {
-  List<ToDoModel> toDoList = [];
+  List<ToDoModel> _toDoList = [];
+
+  List<ToDoModel> returnToDoList() {
+    final toDoList = _toDoList;
+    return toDoList;
+  }
 
   void createInitialData() {
-    toDoList = [
+    _toDoList = [
       ToDoModel(
         taskTodo: 'example',
         dateTodo: DateTime(2012, 03, 03, 12, 34).toString(),
@@ -24,8 +30,8 @@ class ToDoDataBase extends ChangeNotifier {
     updateDataBase();
   }
 
-   void saveNewTask(DateTime date, String task) {
-    toDoList.add(
+  void saveNewTask(DateTime date, String task) {
+    _toDoList.add(
       ToDoModel(
         taskTodo: task,
         dateTodo: date.toString(),
@@ -37,17 +43,17 @@ class ToDoDataBase extends ChangeNotifier {
   }
 
   void deletedTask(int index) {
-    toDoList.removeAt(index);
+    _toDoList.removeAt(index);
     updateDataBase();
   }
 
-    void checkBoxChanged(bool? value, int index) {
-    toDoList[index].isCompleted = !toDoList[index].isCompleted;
+  void checkBoxChanged(bool? value, int index) {
+    _toDoList[index].isCompleted = !_toDoList[index].isCompleted;
     updateDataBase();
   }
 
   void orderByeDate() {
-    toDoList.sort((a, b) => a.dateTodo.compareTo(b.dateTodo));
+    _toDoList.sort((a, b) => a.dateTodo.compareTo(b.dateTodo));
   }
 
   Future<void> loadData() async {
@@ -55,7 +61,7 @@ class ToDoDataBase extends ChangeNotifier {
     final datasource = TodoGetDatasource(hiveService);
     final repository = TodoGetRepository(datasource);
     final controller = TodoGetController(repository);
-    toDoList = await controller.initiatedTodo('TODOLIST');
+    _toDoList = await controller.initiatedTodo('TODOLIST');
     notifyListeners();
   }
 
@@ -65,7 +71,7 @@ class ToDoDataBase extends ChangeNotifier {
     final dataSource = TodoPutDatasource(hiveService);
     final repository = TodoPutRepository(dataSource);
     final controller = TodoPutController(repository);
-    await controller.putTodo('TODOLIST', toDoList);
+    await controller.putTodo('TODOLIST', _toDoList);
     notifyListeners();
   }
 }

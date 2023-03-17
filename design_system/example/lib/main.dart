@@ -56,7 +56,17 @@ class HotReloadWidgetbook extends StatelessWidget {
               name: 'Filter Button',
               useCases: [
                 WidgetbookUseCase(
-                  name: 'selected Filter',
+                  name: 'selected Filter true',
+                  builder: (context) => FilterButtonWidget(
+                    text: 'All',
+                    icon: CustomIcon.archiveIcon,
+                    notifications: 35,
+                    active: true,
+                    screenSize: screenSize,
+                  ),
+                ),
+                WidgetbookUseCase(
+                  name: 'selected Filter False',
                   builder: (context) => FilterButtonWidget(
                     text: 'All',
                     icon: CustomIcon.archiveIcon,
@@ -111,6 +121,67 @@ class HotReloadWidgetbook extends StatelessWidget {
               ],
             ),
             WidgetbookComponent(
+              name: 'Profile Button',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'profile button true',
+                  builder: (context) => ProfileButtonsWidget(
+                    icon: CustomIcon.volumeMuteIcon,
+                    active: true,
+                    screenSize: screenSize,
+                  ),
+                ),
+                WidgetbookUseCase(
+                  name: 'profile button False',
+                  builder: (context) => ProfileButtonsWidget(
+                    icon: CustomIcon.volumeMuteIcon,
+                    active: false,
+                    screenSize: screenSize,
+                  ),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Menu Button',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Menu button true',
+                  builder: (context) => MenuButtonWidget(
+                    icon: CustomIcon.statisticsChart,
+                    active: true,
+                    screenSize: screenSize,
+                  ),
+                ),
+                WidgetbookUseCase(
+                  name: 'Menu button False',
+                  builder: (context) => MenuButtonWidget(
+                    icon: CustomIcon.statisticsChart,
+                    active: false,
+                    screenSize: screenSize,
+                  ),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'Online status',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'online true',
+                  builder: (context) => OnlineStatusWidget(
+                    isOnline: true,
+                    screenSize: screenSize,
+                  ),
+                ),
+                WidgetbookUseCase(
+                  name: 'online false',
+                  builder: (context) => OnlineStatusWidget(
+                    isOnline: false,
+                    screenSize: screenSize,
+                  ),
+                ),
+              ],
+            ),
+            WidgetbookComponent(
               name: 'Avatar Icon',
               useCases: [
                 WidgetbookUseCase(
@@ -125,6 +196,13 @@ class HotReloadWidgetbook extends StatelessWidget {
                 WidgetbookUseCase(
                   name: 'Avatar Todo List',
                   builder: (context) => AvatarTodoListWidget(
+                    avatarImage: 'assets/avatar/avatar.png',
+                    screenSize: screenSize,
+                  ),
+                ),
+                WidgetbookUseCase(
+                  name: 'Avatar Todo List',
+                  builder: (context) => AvatarChatWidget(
                     avatarImage: 'assets/avatar/avatar.png',
                     screenSize: screenSize,
                   ),
