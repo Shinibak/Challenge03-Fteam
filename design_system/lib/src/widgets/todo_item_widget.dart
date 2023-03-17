@@ -6,7 +6,7 @@ import '../themes/theme_extensions.dart';
 
 class TodoItemWidget extends StatelessWidget {
   final String taskName;
-  final DateTime todoData;
+  final String date;
   final double screenSize;
   final bool taskCompleted;
   Function(bool?)? onChanged;
@@ -15,7 +15,7 @@ class TodoItemWidget extends StatelessWidget {
   TodoItemWidget({
     super.key,
     required this.taskName,
-    required this.todoData,
+    required this.date,
     required this.screenSize,
     required this.taskCompleted,
     required this.onChanged,
@@ -29,9 +29,10 @@ class TodoItemWidget extends StatelessWidget {
     final colors = MyColors();
     late final String period;
     final month = DateFormat('MMM');
-    late DateTime dateTime = DateTime.now();
+    final dateTime = DateTime.now();
     late TextStyle style;
     late bool validate;
+    final todoData = DateTime.parse(date);
     if (todoData.hour > 12) {
       period = 'PM';
     } else {
@@ -90,12 +91,21 @@ class TodoItemWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(top: screenSize * 0.032),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: screenSize * 0.032),
-              Checkbox(
-                value: taskCompleted,
-                onChanged: onChanged,
-                activeColor: theme.buttonColorOn,
+              Transform.scale(
+                scale: 1.9,
+                child: Checkbox(
+                  value: taskCompleted,
+                  onChanged: onChanged,
+                  activeColor: theme.buttonColorOn,
+                  checkColor: Colors.black,
+                  side: const BorderSide(
+                    width: 1.5,
+                    color: Color(0xfff1fa88),
+                  ),
+                ),
               ),
               SizedBox(width: screenSize * 0.037),
               Column(

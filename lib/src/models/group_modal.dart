@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
-class GroupModal {
+class GroupModel {
   final String text;
   final bool active;
 
-  const GroupModal({
+  const GroupModel({
     required this.text,
     required this.active,
   });

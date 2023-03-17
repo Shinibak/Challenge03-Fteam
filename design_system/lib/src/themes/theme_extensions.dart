@@ -42,7 +42,7 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
     Color? mutedIcon,
     Color? todoColorOn,
      Color? todoColorOff,
-     TextStyle? lateStyle
+     TextStyle? lateStyle,
   ]) {
     return ThemeCustom(
       buttonTextOnStyle: buttonTextOnStyle ?? this.buttonTextOnStyle,

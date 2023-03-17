@@ -3,10 +3,10 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class ExpandedListWidget extends StatefulWidget {
-  final String Group;
+  final String group;
   final bool active;
   const ExpandedListWidget(
-      {super.key, required this.Group, required this.active});
+      {super.key, required this.group, required this.active});
 
   @override
   State<ExpandedListWidget> createState() => _ExpandedListWidgetState();
@@ -74,7 +74,7 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                 children: [
                   Expanded(
                     child: Text(
-                      widget.Group,
+                      widget.group,
                       style: textStyle.subtitle2,
                     ),
                   ),

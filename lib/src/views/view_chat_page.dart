@@ -52,7 +52,7 @@ class ViewChatPage extends StatelessWidget {
                           bottom: screenSize * 0.069,
                         ),
                         child: ExpandedListWidget(
-                          Group: groups[index].text,
+                          group: groups[index].text,
                           active: groups[index].active,
                         ),
                       );

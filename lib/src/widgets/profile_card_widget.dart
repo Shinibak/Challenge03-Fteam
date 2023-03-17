@@ -1,10 +1,10 @@
 import 'package:challenge03_fteam/src/mockup/profile_buttons_data.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-import '../models/profile_modal.dart';
+import '../models/profile_model.dart';
 
 class ProfileCardWidget extends StatelessWidget {
-  final ProfileModal profile;
+  final ProfileModel profile;
   const ProfileCardWidget({
     super.key,
     required this.profile,

@@ -1,9 +1,9 @@
-import 'package:challenge03_fteam/src/models/profile_modal.dart';
+import 'package:challenge03_fteam/src/models/profile_model.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class AppBarChatWidget extends StatelessWidget {
-  final ProfileModal profile;
+  final ProfileModel profile;
 
   const AppBarChatWidget({
     super.key,
