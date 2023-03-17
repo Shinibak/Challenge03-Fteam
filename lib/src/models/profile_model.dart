@@ -1,16 +1,16 @@
-import 'package:challenge03_fteam/src/models/chat_modal.dart';
+import 'package:challenge03_fteam/src/models/chat_model.dart';
 
-class ProfileModal {
+class ProfileModel {
   final String avatarImage;
   final String name;
   final String number;
   final bool isMuted;
   final bool isOnline;
   final String status;
-  final List<ChatModal> messages;
+  final List<ChatModel> messages;
   final int notifications;
 
-  ProfileModal({
+  ProfileModel({
     required this.avatarImage,
     required this.name,
     required this.number,

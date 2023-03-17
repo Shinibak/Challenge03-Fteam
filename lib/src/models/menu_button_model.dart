@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MenuButtonModal {
+class MenuButtonModel {
   final IconData icon;
   final bool active;
 
-  const MenuButtonModal({
+  const MenuButtonModel({
     required this.icon,
     required this.active,
   });

@@ -1,8 +1,9 @@
+import 'package:challenge03_fteam/src/models/todo_model.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../data/todo_database.dart';
-import '../models/profile_modal.dart';
+import '../datasource/todo_database.dart';
+import '../models/profile_model.dart';
 import '../widgets/profile_card_widget.dart';
 import '../widgets/todo_form.dart';
 
@@ -21,28 +22,29 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
+    super.initState();
     if (_myBox.get('TODOLIST') == null) {
       db.createInitialData();
     } else {
       db.loadData();
     }
-    super.initState();
   }
 
   // ignore: avoid_positional_boolean_parameters
   void checkBoxChanged(bool? value, int index) {
-    db.toDoList[index][2] = !db.toDoList[index][2];
+    db.toDoList[index].isCompleted = !db.toDoList[index].isCompleted;
     db.updateDataBase();
   }
 
   void saveNewTask(DateTime date, String task) {
     db.toDoList.add(
-      [
-        task,
-        date,
-        false,
-      ],
+      ToDoModel(
+        taskTodo: task,
+        dateTodo: date.toString(),
+        isCompleted: false,
+      ),
     );
+    // db.createInitialData();
     db.updateDataBase();
   }
 
@@ -54,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     // ignore: cast_nullable_to_non_nullable
-    final profile = ModalRoute.of(context)!.settings.arguments as ProfileModal;
+    final profile = ModalRoute.of(context)!.settings.arguments as ProfileModel;
     final screenSize = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -75,9 +77,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         left: screenSize * 0.048,
                       ),
                       child: TodoItemWidget(
-                        taskName: db.toDoList[index][0],
-                        todoData: db.toDoList[index][1],
-                        taskCompleted: db.toDoList[index][2],
+                        taskName: db.toDoList[index].taskTodo,
+                        date: db.toDoList[index].dateTodo,
+                        taskCompleted: db.toDoList[index].isCompleted,
                         screenSize: screenSize,
                         onChanged: (value) => checkBoxChanged(value, index),
                         deletedFunction: (context) => deletedTask(index),

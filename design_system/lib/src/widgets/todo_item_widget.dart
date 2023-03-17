@@ -6,7 +6,7 @@ import '../themes/theme_extensions.dart';
 
 class TodoItemWidget extends StatelessWidget {
   final String taskName;
-  final DateTime todoData;
+  final String date;
   final double screenSize;
   final bool taskCompleted;
   Function(bool?)? onChanged;
@@ -15,7 +15,7 @@ class TodoItemWidget extends StatelessWidget {
   TodoItemWidget({
     super.key,
     required this.taskName,
-    required this.todoData,
+    required this.date,
     required this.screenSize,
     required this.taskCompleted,
     required this.onChanged,
@@ -32,6 +32,7 @@ class TodoItemWidget extends StatelessWidget {
     final dateTime = DateTime.now();
     late TextStyle style;
     late bool validate;
+    final todoData = DateTime.parse(date);
     if (todoData.hour > 12) {
       period = 'PM';
     } else {

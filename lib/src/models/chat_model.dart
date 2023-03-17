@@ -1,10 +1,10 @@
-class ChatModal {
+class ChatModel {
   final List<String> message;
   final String hour;
   final bool sending;
   final String profilePicture;
 
-  ChatModal({
+  ChatModel({
     required this.message,
     required this.hour,
     required this.sending,
