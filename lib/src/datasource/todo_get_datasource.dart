@@ -1,5 +1,3 @@
-import 'package:challenge03_fteam/src/models/todo_model.dart';
-
 import 'clients/clients_get_http.dart';
 
 abstract class ITodoGetDatasource {

@@ -19,13 +19,13 @@ class _TodoFormListState extends State<TodoFormList> {
   final _formKey = GlobalKey<FormState>();
   final colors = MyColors();
   late DateTime dateTime;
-  late final dateReserved;
+  late final reservedDate;
   bool validate = true;
 
   @override
   void initState() {
     dateTime = DateTime.now();
-    dateReserved = dateTime;
+    reservedDate = dateTime;
 
     super.initState();
   }
@@ -33,7 +33,7 @@ class _TodoFormListState extends State<TodoFormList> {
   Future<DateTime?> pickDate() => showDatePicker(
         context: context,
         initialDate: dateTime,
-        firstDate: dateReserved,
+        firstDate: reservedDate,
         lastDate: DateTime(3000),
       );
 

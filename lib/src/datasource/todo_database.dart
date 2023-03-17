@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:challenge03_fteam/src/controllers/todo_put_controller.dart';
 import 'package:challenge03_fteam/src/models/todo_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,16 +13,36 @@ import 'todo_put_datasource.dart';
 class ToDoDataBase extends ChangeNotifier {
   List<ToDoModel> toDoList = [];
 
-  final _myBox = Hive.box('myBox');
-
   void createInitialData() {
     toDoList = [
       ToDoModel(
-        taskTodo: 'exemplo',
+        taskTodo: 'example',
         dateTodo: DateTime(2012, 03, 03, 12, 34).toString(),
         isCompleted: false,
       ),
     ];
+    updateDataBase();
+  }
+
+   void saveNewTask(DateTime date, String task) {
+    toDoList.add(
+      ToDoModel(
+        taskTodo: task,
+        dateTodo: date.toString(),
+        isCompleted: false,
+      ),
+    );
+    // db.createInitialData();
+    updateDataBase();
+  }
+
+  void deletedTask(int index) {
+    toDoList.removeAt(index);
+    updateDataBase();
+  }
+
+    void checkBoxChanged(bool? value, int index) {
+    toDoList[index].isCompleted = !toDoList[index].isCompleted;
     updateDataBase();
   }
 
@@ -43,21 +61,11 @@ class ToDoDataBase extends ChangeNotifier {
 
   Future<void> updateDataBase() async {
     orderByeDate();
-    final todoMap = toDoList.map((e) {
-      return {
-        'taskTodo': e.taskTodo,
-        'dateTodo': e.dateTodo.toString(),
-        'isCompleted': e.isCompleted,
-      };
-    }).toList(); //convert to map
-    final stringsTodo = json.encode(todoMap);
-    _myBox.put('TODOLIST', stringsTodo);
-
-    // final hiveService = TodoHttpPutService(Hive.box('myBox'));
-    // final dataSource = TodoPutDatasource(hiveService);
-    // final repository = TodoPutRepository(dataSource);
-    // final controller = TodoPutController(repository);
-    // await controller.subirTodo('TODOLIST', toDoList);
+    final hiveService = TodoHttpPutService(Hive.box('myBox'));
+    final dataSource = TodoPutDatasource(hiveService);
+    final repository = TodoPutRepository(dataSource);
+    final controller = TodoPutController(repository);
+    await controller.putTodo('TODOLIST', toDoList);
     notifyListeners();
   }
 }

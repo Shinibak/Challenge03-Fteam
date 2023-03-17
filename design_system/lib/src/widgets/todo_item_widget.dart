@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../themes/colors.dart';
 import '../themes/theme_extensions.dart';
 
+// ignore: must_be_immutable
 class TodoItemWidget extends StatelessWidget {
   final String taskName;
   final String date;

@@ -1,4 +1,3 @@
-import 'package:challenge03_fteam/src/models/todo_model.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -30,29 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  // ignore: avoid_positional_boolean_parameters
-  void checkBoxChanged(bool? value, int index) {
-    db.toDoList[index].isCompleted = !db.toDoList[index].isCompleted;
-    db.updateDataBase();
-  }
-
-  void saveNewTask(DateTime date, String task) {
-    db.toDoList.add(
-      ToDoModel(
-        taskTodo: task,
-        dateTodo: date.toString(),
-        isCompleted: false,
-      ),
-    );
-    // db.createInitialData();
-    db.updateDataBase();
-  }
-
-  void deletedTask(int index) {
-    db.toDoList.removeAt(index);
-    db.updateDataBase();
-  }
-
   @override
   Widget build(BuildContext context) {
     // ignore: cast_nullable_to_non_nullable
@@ -81,8 +57,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         date: db.toDoList[index].dateTodo,
                         taskCompleted: db.toDoList[index].isCompleted,
                         screenSize: screenSize,
-                        onChanged: (value) => checkBoxChanged(value, index),
-                        deletedFunction: (context) => deletedTask(index),
+                        onChanged: (value) => db.checkBoxChanged(value, index),
+                        deletedFunction: (context) => db.deletedTask(index),
                       ),
                     );
                   },
@@ -102,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: TodoFormList(
-                onRefreshScreen: saveNewTask,
+                onRefreshScreen: db.saveNewTask,
               ),
             ),
           );

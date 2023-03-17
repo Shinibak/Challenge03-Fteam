@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 class ExpandedListWidget extends StatefulWidget {
   final String group;
   final bool active;
-  const ExpandedListWidget(
-      {super.key, required this.group, required this.active});
+  const ExpandedListWidget({
+    super.key,
+    required this.group,
+    required this.active,
+  });
 
   @override
   State<ExpandedListWidget> createState() => _ExpandedListWidgetState();
@@ -30,11 +33,14 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
 
     rotationAnimation = Tween(
       begin: 0.5,
+      // ignore: prefer_int_literals
       end: 0.0,
     ).animate(controller);
 
     heightFactoAnimation = Tween(
+      // ignore: prefer_int_literals
       begin: 0.0,
+      // ignore: prefer_int_literals
       end: 1.0,
     ).animate(controller);
     if (wasPassed) {
