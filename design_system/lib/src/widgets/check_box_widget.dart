@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../../design_system.dart';
 
 class CheckBoxWidget extends StatelessWidget {
-  bool wasCheck;
+  final bool wasCheck;
   final double screenSize;
 
-  CheckBoxWidget({
+  const CheckBoxWidget({
     super.key,
     required this.wasCheck,
     required this.screenSize,

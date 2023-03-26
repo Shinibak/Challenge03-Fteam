@@ -1,11 +1,11 @@
-import 'clients/clients_put_http.dart';
+import 'local_service/hive_local_storage_service.dart';
 
 abstract class ITodoPutDatasource {
   Future putDataSource(String key, String put);
 }
 
 class TodoPutDatasource implements ITodoPutDatasource {
-  final IHttpPutService _service;
+  final ILocalStorageService _service;
 
   TodoPutDatasource(this._service);
 

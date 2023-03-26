@@ -1,8 +1,13 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../datasource/todo_database.dart';
+import '../controllers/todo_controle.dart';
+import '../datasource/local_service/hive_local_storage_service.dart';
+import '../datasource/todo_get_datasource.dart';
+import '../datasource/todo_put_datasource.dart';
 import '../models/profile_model.dart';
+import '../repositories/todo_get_repository.dart';
+import '../repositories/todo_put_repository.dart';
 import '../widgets/todo_form.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -15,16 +20,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final _myBox = Hive.box('myBox');
-  ToDoDataBase db = ToDoDataBase();
+  late TodoController controller;
 
   @override
   void initState() {
     super.initState();
-    if (_myBox.get('TODOLIST') == null) {
-      db.createInitialData();
-    } else {
-      db.loadData();
+    final myBox = Hive.box('myBox');
+    final hiveService = HiveLocalStorageService(myBox);
+    final getDatasource = TodoGetDatasource(hiveService);
+    final putDatasource = TodoPutDatasource(hiveService);
+    final getRepository = TodoGetRepository(getDatasource);
+    final putRepository = TodoPutRepository(putDatasource);
+    controller = TodoController(putRepository, getRepository);
+    if (controller.getTodo() == null) {
+      controller.createInitialData();
     }
   }
 
@@ -36,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       body: AnimatedBuilder(
-        animation: db,
+        animation: controller,
         builder: (context, child) {
           return Column(
             children: [
@@ -50,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(top: screenSize * 0.064),
-                  itemCount: db.returnToDoList().length,
+                  itemCount: controller.returnToDoList().length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.only(
@@ -58,12 +67,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         left: screenSize * 0.048,
                       ),
                       child: TodoItemWidget(
-                        taskName: db.returnToDoList()[index].taskTodo,
-                        date: db.returnToDoList()[index].dateTodo,
-                        taskCompleted: db.returnToDoList()[index].isCompleted,
+                        taskName: controller.returnToDoList()[index].taskTodo,
+                        date: controller.returnToDoList()[index].dateTodo,
+                        taskCompleted:
+                            controller.returnToDoList()[index].isCompleted,
                         screenSize: screenSize,
-                        onChanged: (value) => db.checkBoxChanged(value, index),
-                        deletedFunction: (context) => db.deletedTask(index),
+                        onChanged: (value) =>
+                            controller.checkBoxChanged(value, index),
+                        deletedFunction: (context) =>
+                            controller.deletedTask(index),
                       ),
                     );
                   },
@@ -83,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: TodoFormList(
-                onRefreshScreen: db.saveNewTask,
+                onRefreshScreen: controller.saveNewTask,
               ),
             ),
           );

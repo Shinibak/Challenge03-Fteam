@@ -1,4 +1,4 @@
-import 'package:challenge03_fteam/src/datasource/todo_database.dart';
+import 'package:challenge03_fteam/src/controllers/todo_controle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -7,21 +7,30 @@ void main() async {
   await Hive.initFlutter();
   final box = await Hive.openBox('myBox');
   final db = ToDoDataBase();
-  await db.loadData();
+  db.createInitialData();
   final todolist = db.returnToDoList();
 
-  testWidgets(
+  final firsTodo = await DateTime.parse(todolist.first.dateTodo);
+
+  final lastTodo = await DateTime.parse(todolist.last.dateTodo);
+
+  bool dateValide() {
+    if (firsTodo.year <= lastTodo.year &&
+        firsTodo.month <= lastTodo.month &&
+        firsTodo.day <= lastTodo.day &&
+        firsTodo.hour <= lastTodo.hour &&
+        firsTodo.minute < lastTodo.minute) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  test(
     'testando a ordem',
-    (WidgetTester tester) async {
-      ListView.builder(
-        padding: EdgeInsets.zero,
-        itemCount: todolist.length,
-        itemBuilder: (BuildContext context, int index) {
-          final ordination = DateTime.parse(todolist[index].dateTodo);
-          return Text(
-              '${ordination.day}/${ordination.month}/${ordination.year}');
-        },
-      );
+    () {
+      dateValide();
+      print(dateValide());
     },
   );
 }

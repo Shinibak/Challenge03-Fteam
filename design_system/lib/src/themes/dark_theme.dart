@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 ThemeData get darkTheme => ThemeData(
       useMaterial3: true,
-      primaryColor: const Color.fromARGB(255, 68, 68, 68),
+      primaryColor: const Color(0xff20232a),
       scaffoldBackgroundColor: const Color(0xff1f222a),
       iconTheme: const IconThemeData(color: Colors.white),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        foregroundColor: Color(0xff6963db),
+      ),
       textTheme: const TextTheme(
         headline6: TextStyle(fontSize: 10, color: Colors.white),
         button: TextStyle(fontSize: 14, color: Colors.white),
