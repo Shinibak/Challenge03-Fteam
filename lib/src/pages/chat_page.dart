@@ -18,7 +18,10 @@ class ChatPage extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                AppBarChatWidget(profile: profile),
+                AppBarChatWidget(
+                  profile: profile,
+                  screenSize: screenSize,
+                ),
                 ChatListWidget(profile: profile),
               ],
             ),

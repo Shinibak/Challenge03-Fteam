@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class ExpandedListWidget extends StatefulWidget {
   final String group;
   final bool active;
+  final double screenSize;
   const ExpandedListWidget({
     super.key,
     required this.group,
     required this.active,
+    required this.screenSize,
   });
 
   @override
@@ -58,7 +60,6 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
     return AnimatedBuilder(
       animation: controller,
@@ -88,7 +89,7 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                     turns: rotationAnimation,
                     child: Icon(
                       Icons.expand_more,
-                      size: screenSize * 0.037,
+                      size: widget.screenSize * 0.037,
                     ),
                   ),
                 ],
@@ -99,11 +100,11 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                 heightFactor: heightFactoAnimation.value,
                 alignment: Alignment.topLeft,
                 child: SizedBox(
-                  height: (screenSize * 0.048) +
-                      ((profileList.length - 1) * (screenSize * 0.261)) +
-                      (screenSize * 0.186),
+                  height: (widget.screenSize * 0.048) +
+                      ((profileList.length - 1) * (widget.screenSize * 0.261)) +
+                      (widget.screenSize * 0.186),
                   child: Padding(
-                    padding: EdgeInsets.only(top: screenSize * 0.048),
+                    padding: EdgeInsets.only(top: widget.screenSize * 0.048),
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
                       itemCount: profileList.length,
@@ -120,7 +121,7 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                           child: Padding(
                             padding: EdgeInsets.only(
                               bottom: index < profileList.length - 1
-                                  ? screenSize * 0.074
+                                  ? widget.screenSize * 0.074
                                   : 0,
                             ),
                             child: ChatPreviewWidget(
@@ -134,7 +135,7 @@ class _ExpandedListWidgetState extends State<ExpandedListWidget>
                                   profileList[index].messages.last.message.last,
                               muted: profileList[index].isMuted,
                               online: profileList[index].isOnline,
-                              screenSize: screenSize,
+                              screenSize: widget.screenSize,
                             ),
                           ),
                         );

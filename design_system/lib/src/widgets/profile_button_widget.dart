@@ -1,6 +1,4 @@
-import 'package:design_system/src/themes/colors.dart';
 import 'package:flutter/material.dart';
-
 import '../themes/theme_extensions.dart';
 
 class ProfileButtonsWidget extends StatelessWidget {
@@ -17,14 +15,13 @@ class ProfileButtonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<ThemeCustom>()!;
-    final colors = MyColors();
 
     return Container(
       height: screenSize * 0.16,
       width: screenSize * 0.16,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.04),
-        color: colors.profileButton,
+        color: theme.profileButton,
       ),
       child: Center(
         child: Icon(

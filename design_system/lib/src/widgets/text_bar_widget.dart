@@ -9,14 +9,13 @@ class TextBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<ThemeCustom>()!;
     final iconColor = Theme.of(context).iconTheme.color;
-    final colors = MyColors();
 
     return Container(
       width: screenSize * 0.898,
       height: screenSize * 0.154,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(screenSize * 0.042),
-        color: colors.backOpacity,
+        color:theme.backOpacity,
       ),
       child: Row(
         children: [
@@ -49,7 +48,7 @@ class TextBarWidget extends StatelessWidget {
               child: Icon(
                 CustomIcon.sentIcon,
                 size: screenSize * 0.053,
-                color: colors.back,
+                color: theme.back,
               ),
             ),
           ),

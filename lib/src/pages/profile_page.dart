@@ -25,16 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    final myBox = Hive.box('myBox');
-    final hiveService = HiveLocalStorageService(myBox);
-    final getDatasource = TodoGetDatasource(hiveService);
-    final putDatasource = TodoPutDatasource(hiveService);
-    final getRepository = TodoGetRepository(getDatasource);
-    final putRepository = TodoPutRepository(putDatasource);
-    controller = TodoController(putRepository, getRepository);
-    if (controller.getTodo() == null) {
-      controller.createInitialData();
-    }
   }
 
   @override
@@ -42,6 +32,16 @@ class _ProfilePageState extends State<ProfilePage> {
     // ignore: cast_nullable_to_non_nullable
     final profile = ModalRoute.of(context)!.settings.arguments as ProfileModel;
     final screenSize = MediaQuery.of(context).size.width;
+
+    final myBox = Hive.box('myBox');
+    final hiveService = HiveLocalStorageService(myBox);
+    final getDatasource = TodoGetDatasource(hiveService);
+    final putDatasource = TodoPutDatasource(hiveService);
+    final getRepository = TodoGetRepository(getDatasource);
+    final putRepository = TodoPutRepository(putDatasource);
+    final controller = TodoController(putRepository, getRepository);
+    controller.getTodo(profile.name);
+    
 
     return Scaffold(
       body: AnimatedBuilder(
@@ -55,6 +55,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 isOnline: profile.isOnline,
                 number: profile.number,
                 status: profile.status,
+                skills: profile.skills,
+                screenSize: screenSize,
               ),
               Expanded(
                 child: ListView.builder(
@@ -96,12 +98,14 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: TodoFormList(
                 onRefreshScreen: controller.saveNewTask,
+                screenSize: screenSize,
               ),
             ),
           );
         },
-        child: const Icon(
+        child: Icon(
           Icons.add,
+          color: Theme.of(context).iconTheme.color,
         ),
       ),
     );

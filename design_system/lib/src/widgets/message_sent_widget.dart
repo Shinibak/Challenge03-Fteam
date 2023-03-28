@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../themes/colors.dart';
+import '../themes/theme_extensions.dart';
 
 class MessageSentWidget extends StatelessWidget {
   final double screenSize;
@@ -14,7 +13,9 @@ class MessageSentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
-    final colors = MyColors();
+    
+    final theme = Theme.of(context).extension<ThemeCustom>()!;
+  
     return Row(
       // mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
@@ -28,7 +29,7 @@ class MessageSentWidget extends StatelessWidget {
               topLeft: Radius.circular(screenSize * 0.042),
               bottomLeft: Radius.circular(screenSize * 0.042),
             ),
-            color: colors.sendMsg,
+            color: theme.sendMsg,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 
 class ListFilterButtonWidget extends StatelessWidget {
   final List filterList;
-  const ListFilterButtonWidget({super.key, required this.filterList});
+  final double screenSize;
+  const ListFilterButtonWidget({
+    super.key,
+    required this.filterList,
+    required this.screenSize,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
+  
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: filterList.length,

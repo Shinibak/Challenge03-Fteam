@@ -7,6 +7,8 @@ class ProfileCardWidget extends StatelessWidget {
   final bool isOnline;
   final String number;
   final String status;
+  final List skills;
+  final double screenSize;
   const ProfileCardWidget({
     super.key,
     required this.avatarImage,
@@ -14,13 +16,14 @@ class ProfileCardWidget extends StatelessWidget {
     required this.isOnline,
     required this.number,
     required this.status,
+    required this.skills,
+    required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context).extension<ThemeCustom>()!;
     final textStyle = Theme.of(context).textTheme;
-    final colors = MyColors();
 
     return Container(
       width: screenSize,
@@ -28,7 +31,7 @@ class ProfileCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(screenSize * 0.096),
         ),
-        color: colors.profileCardTheme,
+        color: theme.profileCardTheme,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -148,37 +151,21 @@ class ProfileCardWidget extends StatelessWidget {
           ),
           SizedBox(height: screenSize * 0.037),
           SizedBox(
-            width: screenSize * 0.6,
+            width: screenSize * 0.60,
             child: Wrap(
-              spacing: screenSize * 0.02,
+              alignment: WrapAlignment.center,
+              spacing: screenSize * 0.021,
               runSpacing: screenSize * 0.021,
-              children: [
-                ProfileSkillsWidget(
-                  backgroundColor: colors.uiUxColor,
-                  title: 'UI/UX Designer',
-                  screenSize: screenSize,
-                ),
-                ProfileSkillsWidget(
-                  backgroundColor: colors.projectManagerColor,
-                  title: 'Project Manager',
-                  screenSize: screenSize,
-                ),
-                ProfileSkillsWidget(
-                  backgroundColor: colors.qaColor,
-                  title: 'QA',
-                  screenSize: screenSize,
-                ),
-                ProfileSkillsWidget(
-                  backgroundColor: colors.seoColor,
-                  title: 'SEO',
-                  screenSize: screenSize,
-                ),
-                ProfileSkillsWidget(
-                  backgroundColor: colors.javaColor,
-                  title: 'Java Script Developer',
-                  screenSize: screenSize,
-                ),
-              ],
+              children: List.generate(
+                skills.length,
+                (index) {
+                  return ProfileSkillsWidget(
+                    backgroundColor: skills[index].color,
+                    title: skills[index].skill,
+                    screenSize: screenSize,
+                  );
+                },
+              ),
             ),
           ),
           SizedBox(

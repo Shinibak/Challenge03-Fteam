@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 
 class MenuBarWidget extends StatelessWidget {
   final List menuList;
-  const MenuBarWidget({super.key, required this.menuList});
+  final double screenSize;
+  const MenuBarWidget({
+    super.key,
+    required this.menuList,
+    required this.screenSize,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
+   
     return Container(
       height: screenSize * 0.282,
       width: screenSize,

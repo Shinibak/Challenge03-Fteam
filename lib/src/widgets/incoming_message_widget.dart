@@ -6,17 +6,18 @@ class IncomingMessageWidget extends StatelessWidget {
   final String name;
   final String hours;
   final List messages;
+  final double screenSize;
   const IncomingMessageWidget({
     super.key,
     required this.hours,
     required this.messages,
     required this.profilePicture,
     required this.name,
+    required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
 
     return Column(

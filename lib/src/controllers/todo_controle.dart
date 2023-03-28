@@ -10,6 +10,7 @@ class TodoController extends ChangeNotifier {
   TodoController(this._todoPutRepository, this._todoGetRepository);
 
   List<ToDoModel> _toDoList = [];
+  late String _name;
 
   List<ToDoModel> returnToDoList() {
     final toDoList = _toDoList;
@@ -17,23 +18,13 @@ class TodoController extends ChangeNotifier {
   }
 
   void createInitialData() {
-    _toDoList = [
+    _toDoList.add(
       ToDoModel(
         taskTodo: 'example 1',
         dateTodo: DateTime(2012, 03, 03, 12, 34).toString(),
         isCompleted: false,
       ),
-      ToDoModel(
-        taskTodo: 'example 2',
-        dateTodo: DateTime(2022, 05, 04, 12, 34).toString(),
-        isCompleted: false,
-      ),
-      ToDoModel(
-        taskTodo: 'example 3',
-        dateTodo: DateTime(2015, 11, 02, 12, 34).toString(),
-        isCompleted: true,
-      ),
-    ];
+    );
     putTodo();
   }
 
@@ -62,15 +53,16 @@ class TodoController extends ChangeNotifier {
     _toDoList.sort((a, b) => a.dateTodo.compareTo(b.dateTodo));
   }
 
-  Future<List<ToDoModel>> getTodo() async {
-    _toDoList = await _todoGetRepository.getTodo('TODOLIST');
+  Future<List<ToDoModel>> getTodo(String name) async {
+    _name = name;
+    _toDoList = await _todoGetRepository.getTodo(_name);
     notifyListeners();
     return returnToDoList();
   }
 
   Future<void> putTodo() async {
     orderByeDate();
-    await _todoPutRepository.putTodo('TODOLIST', _toDoList);
+    await _todoPutRepository.putTodo(_name, _toDoList);
     notifyListeners();
   }
 }

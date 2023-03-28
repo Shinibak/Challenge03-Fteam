@@ -1,7 +1,6 @@
 library design_system;
 
 export 'src/continuos/custom_icon_icons.dart';
-export 'src/themes/colors.dart';
 export 'src/themes/dark_theme.dart';
 export 'src/themes/light_theme.dart';
 export 'src/themes/theme_extensions.dart';

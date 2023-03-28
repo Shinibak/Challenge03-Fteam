@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ThemeCustom extends ThemeExtension<ThemeCustom> {
   final TextStyle? buttonTextOnStyle;
   final TextStyle? buttonTestOffStyle;
+  final TextStyle? buttonError;
   final Color? buttonColorOn;
   final Color? buttonColorOff;
   final Color? notificationColorOn;
@@ -12,7 +13,16 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
   final Color? mutedIcon;
   final Color? todoColorOn;
   final Color? todoColorOff;
-    final TextStyle? lateStyle;
+  final TextStyle? lateStyle;
+  final Color? profileButton;
+  final Color? profileCardTheme;
+  final Color? onlineColor;
+  final Color? offlineColor;
+  final Color? sendMsg;
+  final Color? receivedMsg;
+  final Color? backOpacity;
+  final Color? back;
+  final Color? deleted;
 
   ThemeCustom({
     required this.buttonTextOnStyle,
@@ -27,6 +37,16 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
     required this.todoColorOn,
     required this.todoColorOff,
     required this.lateStyle,
+    required this.buttonError,
+    required this.profileButton,
+    required this.profileCardTheme,
+    required this.onlineColor,
+    required this.offlineColor,
+    required this.sendMsg,
+    required this.receivedMsg,
+    required this.backOpacity,
+    required this.back,
+    required this.deleted,
   });
 
   @override
@@ -41,8 +61,18 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
     Color? buttonIconColorOff,
     Color? mutedIcon,
     Color? todoColorOn,
-     Color? todoColorOff,
-     TextStyle? lateStyle,
+    Color? todoColorOff,
+    TextStyle? lateStyle,
+    TextStyle? buttonError,
+    Color? profileButton,
+    Color? profileCardTheme,
+    Color? onlineColor,
+    Color? offlineColor,
+    Color? sendMsg,
+    Color? receivedMsg,
+    Color? backOpacity,
+    Color? back,
+    Color? deleted,
   ]) {
     return ThemeCustom(
       buttonTextOnStyle: buttonTextOnStyle ?? this.buttonTextOnStyle,
@@ -55,8 +85,18 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
       buttonIconColorOff: buttonIconColorOff ?? this.buttonIconColorOff,
       mutedIcon: mutedIcon ?? this.mutedIcon,
       todoColorOn: todoColorOn ?? this.todoColorOn,
-       todoColorOff: todoColorOff ?? this.todoColorOff,
-       lateStyle: lateStyle?? this.lateStyle,
+      todoColorOff: todoColorOff ?? this.todoColorOff,
+      lateStyle: lateStyle ?? this.lateStyle,
+      buttonError: buttonError ?? this.buttonError,
+      back: back ?? this.back,
+      backOpacity: backOpacity ?? this.backOpacity,
+      deleted: deleted ?? this.deleted,
+      receivedMsg: receivedMsg ?? this.receivedMsg,
+      profileCardTheme: profileCardTheme ?? this.profileCardTheme,
+      offlineColor: offlineColor ?? this.offlineColor,
+      onlineColor: onlineColor ?? this.onlineColor,
+      profileButton: profileButton ?? this.profileButton,
+      sendMsg: sendMsg ?? this.sendMsg,
     );
   }
 
@@ -66,58 +106,34 @@ class ThemeCustom extends ThemeExtension<ThemeCustom> {
       return this;
     }
     return ThemeCustom(
-      buttonTextOnStyle: TextStyle.lerp(
-        buttonTextOnStyle,
-        other.buttonTextOnStyle,
-        t,
-      ),
-      buttonTestOffStyle: TextStyle.lerp(
-        buttonTestOffStyle,
-        other.buttonTestOffStyle,
-        t,
-      ),
+      buttonTextOnStyle:
+          TextStyle.lerp(buttonTextOnStyle, other.buttonTextOnStyle, t),
+      buttonTestOffStyle:
+          TextStyle.lerp(buttonTestOffStyle, other.buttonTestOffStyle, t),
       buttonColorOn: Color.lerp(buttonColorOn, other.buttonColorOn, t),
       buttonColorOff: Color.lerp(buttonColorOff, other.buttonColorOff, t),
-      notificationColorOn: Color.lerp(
-        notificationColorOn,
-        other.notificationColorOn,
-        t,
-      ),
-      notificationColorOff: Color.lerp(
-        notificationColorOff,
-        other.notificationColorOff,
-        t,
-      ),
-      buttonIconColorOn: Color.lerp(
-        buttonIconColorOn,
-        other.buttonIconColorOn,
-        t,
-      ),
-      buttonIconColorOff: Color.lerp(
-        buttonIconColorOff,
-        other.buttonIconColorOff,
-        t,
-      ),
-      mutedIcon: Color.lerp(
-        mutedIcon,
-        other.mutedIcon,
-        t,
-      ),
-      todoColorOn: Color.lerp(
-        todoColorOn,
-        other.todoColorOn,
-        t,
-      ),
-       todoColorOff: Color.lerp(
-        todoColorOn,
-        other.todoColorOn,
-        t,
-      ),
-      lateStyle:  TextStyle.lerp(
-        lateStyle,
-        other.lateStyle,
-        t,
-      ),
+      notificationColorOn:
+          Color.lerp(notificationColorOn, other.notificationColorOn, t),
+      notificationColorOff:
+          Color.lerp(notificationColorOff, other.notificationColorOff, t),
+      buttonIconColorOn:
+          Color.lerp(buttonIconColorOn, other.buttonIconColorOn, t),
+      buttonIconColorOff:
+          Color.lerp(buttonIconColorOff, other.buttonIconColorOff, t),
+      mutedIcon: Color.lerp(mutedIcon, other.mutedIcon, t),
+      todoColorOn: Color.lerp(todoColorOn, other.todoColorOn, t),
+      todoColorOff: Color.lerp(todoColorOff, other.todoColorOff, t),
+      lateStyle: TextStyle.lerp(lateStyle, other.lateStyle, t),
+      buttonError: TextStyle.lerp(buttonError, other.buttonError, t),
+      back: Color.lerp(back, other.back, t),
+      backOpacity: Color.lerp(backOpacity, other.backOpacity, t),
+      deleted: Color.lerp(deleted, other.deleted, t),
+      offlineColor: Color.lerp(offlineColor, other.offlineColor, t),
+      onlineColor: Color.lerp(onlineColor, other.onlineColor, t),
+      profileButton: Color.lerp(profileButton, other.profileButton, t),
+      profileCardTheme: Color.lerp(profileCardTheme, other.profileCardTheme, t),
+      receivedMsg: Color.lerp(receivedMsg, other.receivedMsg, t),
+      sendMsg: Color.lerp(sendMsg, other.sendMsg, t),
     );
   }
 }

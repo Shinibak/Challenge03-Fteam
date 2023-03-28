@@ -1,4 +1,5 @@
 import 'package:challenge03_fteam/src/models/chat_model.dart';
+import 'package:challenge03_fteam/src/models/skiil_set_model.dart';
 
 class ProfileModel {
   final String avatarImage;
@@ -9,6 +10,7 @@ class ProfileModel {
   final String status;
   final List<ChatModel> messages;
   final int notifications;
+  final List<SkillSetModel> skills;
 
   ProfileModel({
     required this.avatarImage,
@@ -19,5 +21,6 @@ class ProfileModel {
     required this.isOnline,
     required this.status,
     required this.notifications,
+    required this.skills,
   });
 }
