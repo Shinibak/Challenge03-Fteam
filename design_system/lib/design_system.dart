@@ -4,7 +4,7 @@ export 'src/continuos/custom_icon_icons.dart';
 export 'src/themes/dark_theme.dart';
 export 'src/themes/light_theme.dart';
 export 'src/themes/theme_extensions.dart';
-export 'src/widgets/Profile_skills_widget.dart';
+export 'src/widgets/profile_skills_widget.dart';
 export 'src/widgets/avatar_chat_widget.dart';
 export 'src/widgets/avatar_notification_widget.dart';
 export 'src/widgets/avatar_todo_list.widget.dart';

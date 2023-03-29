@@ -44,7 +44,7 @@ class TodoController extends ChangeNotifier {
     putTodo();
   }
 
-  void checkBoxChanged(bool? value, int index) {
+  void checkBoxChanged(bool value, int index) {
     _toDoList[index].isCompleted = !_toDoList[index].isCompleted;
     putTodo();
   }
