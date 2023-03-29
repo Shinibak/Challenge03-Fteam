@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 
 class AppBarChatWidget extends StatelessWidget {
   final ProfileModel profile;
+  final double screenSize;
 
   const AppBarChatWidget({
     super.key,
     required this.profile,
+    required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
     final textStyle = Theme.of(context).textTheme;
 
-    
     return Container(
       height: screenSize * 0.261,
       width: screenSize,

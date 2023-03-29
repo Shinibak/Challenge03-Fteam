@@ -16,16 +16,22 @@ class ProfileSkillsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
     return Container(
+      height: screenSize * 0.08,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(screenSize * 0.021),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(screenSize * 0.021),
-        child: Text(
-          title,
-          style: textStyle.caption,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(screenSize * 0.021),
+            child: Text(
+              title,
+              style: textStyle.caption,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -15,7 +15,6 @@ class TodoGetRepository implements ITodoGetRepository {
   Future<List<ToDoModel>> getTodo(String key) async {
     final encode = await _todoGetDatasource.getDataSource(key);
     final dynamicList = await jsonDecode(encode);
-
     final list = List<Map<String, dynamic>>.from(dynamicList)
         .map<ToDoModel>(ToDoModel.fromJson)
         .toList();

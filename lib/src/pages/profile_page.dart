@@ -1,10 +1,13 @@
-import 'package:challenge03_fteam/src/models/todo_model.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../datasource/todo_database.dart';
+import '../controllers/todo_controller.dart';
+import '../datasource/local_service/hive_local_storage_service.dart';
+import '../datasource/todo_get_datasource.dart';
+import '../datasource/todo_put_datasource.dart';
 import '../models/profile_model.dart';
-import '../widgets/profile_card_widget.dart';
+import '../repositories/todo_get_repository.dart';
+import '../repositories/todo_put_repository.dart';
 import '../widgets/todo_form.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,40 +20,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final _myBox = Hive.box('myBox');
-  ToDoDataBase db = ToDoDataBase();
+  late TodoController controller;
 
   @override
   void initState() {
     super.initState();
-    if (_myBox.get('TODOLIST') == null) {
-      db.createInitialData();
-    } else {
-      db.loadData();
-    }
-  }
-
-  // ignore: avoid_positional_boolean_parameters
-  void checkBoxChanged(bool? value, int index) {
-    db.toDoList[index].isCompleted = !db.toDoList[index].isCompleted;
-    db.updateDataBase();
-  }
-
-  void saveNewTask(DateTime date, String task) {
-    db.toDoList.add(
-      ToDoModel(
-        taskTodo: task,
-        dateTodo: date.toString(),
-        isCompleted: false,
-      ),
-    );
-    // db.createInitialData();
-    db.updateDataBase();
-  }
-
-  void deletedTask(int index) {
-    db.toDoList.removeAt(index);
-    db.updateDataBase();
   }
 
   @override
@@ -59,17 +33,35 @@ class _ProfilePageState extends State<ProfilePage> {
     final profile = ModalRoute.of(context)!.settings.arguments as ProfileModel;
     final screenSize = MediaQuery.of(context).size.width;
 
+    final myBox = Hive.box('myBox');
+    final hiveService = HiveLocalStorageService(myBox);
+    final getDatasource = TodoGetDatasource(hiveService);
+    final putDatasource = TodoPutDatasource(hiveService);
+    final getRepository = TodoGetRepository(getDatasource);
+    final putRepository = TodoPutRepository(putDatasource);
+    final controller = TodoController(putRepository, getRepository);
+    controller.getTodo(profile.name);
+    
+
     return Scaffold(
       body: AnimatedBuilder(
-        animation: db,
+        animation: controller,
         builder: (context, child) {
           return Column(
             children: [
-              ProfileCardWidget(profile: profile),
+              ProfileCardWidget(
+                avatarImage: profile.avatarImage,
+                name: profile.name,
+                isOnline: profile.isOnline,
+                number: profile.number,
+                status: profile.status,
+                skills: profile.skills,
+                screenSize: screenSize,
+              ),
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(top: screenSize * 0.064),
-                  itemCount: db.toDoList.length,
+                  itemCount: controller.returnToDoList().length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.only(
@@ -77,12 +69,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         left: screenSize * 0.048,
                       ),
                       child: TodoItemWidget(
-                        taskName: db.toDoList[index].taskTodo,
-                        date: db.toDoList[index].dateTodo,
-                        taskCompleted: db.toDoList[index].isCompleted,
+                        taskName: controller.returnToDoList()[index].taskTodo,
+                        date: controller.returnToDoList()[index].dateTodo,
+                        taskCompleted:
+                            controller.returnToDoList()[index].isCompleted,
                         screenSize: screenSize,
-                        onChanged: (value) => checkBoxChanged(value, index),
-                        deletedFunction: (context) => deletedTask(index),
+                        onChanged: (value) =>
+                            controller.checkBoxChanged(value, index),
+                        deletedFunction: (context) =>
+                            controller.deletedTask(index),
                       ),
                     );
                   },
@@ -102,13 +97,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: TodoFormList(
-                onRefreshScreen: saveNewTask,
+                onRefreshScreen: controller.saveNewTask,
+                screenSize: screenSize,
               ),
             ),
           );
         },
-        child: const Icon(
+        child: Icon(
           Icons.add,
+          color: Theme.of(context).iconTheme.color,
         ),
       ),
     );

@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 class SentMessageWidget extends StatelessWidget {
   final String hours;
   final List messages;
+    final double screenSize;
   const SentMessageWidget({
     super.key,
     required this.hours,
-    required this.messages,
+    required this.messages, required this.screenSize,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size.width;
+   
     final textStyle = Theme.of(context).textTheme;
 
     return Column(

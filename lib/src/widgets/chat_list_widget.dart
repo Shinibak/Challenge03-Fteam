@@ -26,6 +26,7 @@ class ChatListWidget extends StatelessWidget {
                   child: SentMessageWidget(
                     hours: profile.messages[index].hour,
                     messages: profile.messages[index].message,
+                    screenSize: screenSize.width,
                   ),
                 )
               : Padding(
@@ -38,6 +39,7 @@ class ChatListWidget extends StatelessWidget {
                     messages: profile.messages[index].message,
                     profilePicture: profile.messages[index].profilePicture,
                     name: profile.name,
+                    screenSize: screenSize.width,
                   ),
                 );
         },

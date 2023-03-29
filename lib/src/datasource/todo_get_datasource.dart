@@ -1,13 +1,11 @@
-import 'package:challenge03_fteam/src/models/todo_model.dart';
-
-import 'clients/clients_get_http.dart';
+import 'local_service/hive_local_storage_service.dart';
 
 abstract class ITodoGetDatasource {
   Future<String> getDataSource(String key);
 }
 
 class TodoGetDatasource implements ITodoGetDatasource {
-  final IHttpGetService _service;
+  final ILocalStorageService _service;
 
   TodoGetDatasource(this._service);
 

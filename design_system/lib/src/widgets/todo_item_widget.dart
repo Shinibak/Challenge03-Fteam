@@ -1,15 +1,16 @@
+import 'package:design_system/src/widgets/check_box_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import '../themes/colors.dart';
 import '../themes/theme_extensions.dart';
 
+// ignore: must_be_immutable
 class TodoItemWidget extends StatelessWidget {
   final String taskName;
   final String date;
   final double screenSize;
   final bool taskCompleted;
-  Function(bool?)? onChanged;
+  Function(bool)? onChanged;
   Function(BuildContext)? deletedFunction;
 
   TodoItemWidget({
@@ -26,7 +27,6 @@ class TodoItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
     final theme = Theme.of(context).extension<ThemeCustom>()!;
-    final colors = MyColors();
     late final String period;
     final month = DateFormat('MMM');
     final dateTime = DateTime.now();
@@ -38,11 +38,13 @@ class TodoItemWidget extends StatelessWidget {
     } else {
       period = 'AM';
     }
-    if (todoData.minute < dateTime.minute) {
-      if (todoData.hour <= dateTime.hour) {
+    if (todoData.year <= dateTime.year) {
+      if (todoData.month < dateTime.month) {
+        validate = true;
+      } else if (todoData.month == dateTime.month) {
         if (todoData.day <= dateTime.day) {
-          if (todoData.month <= dateTime.month) {
-            if (todoData.year <= dateTime.year) {
+          if (todoData.hour <= dateTime.hour) {
+            if (todoData.minute <= dateTime.minute) {
               validate = true;
             } else {
               validate = false;
@@ -77,7 +79,7 @@ class TodoItemWidget extends StatelessWidget {
           SlidableAction(
             onPressed: deletedFunction,
             icon: Icons.delete,
-            backgroundColor: colors.deleted,
+            backgroundColor: theme.deleted!,
           ),
         ],
       ),
@@ -94,17 +96,11 @@ class TodoItemWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: screenSize * 0.032),
-              Transform.scale(
-                scale: 1.9,
-                child: Checkbox(
-                  value: taskCompleted,
-                  onChanged: onChanged,
-                  activeColor: theme.buttonColorOn,
-                  checkColor: Colors.black,
-                  side: const BorderSide(
-                    width: 1.5,
-                    color: Color(0xfff1fa88),
-                  ),
+              GestureDetector(
+                onTap: () => onChanged!(taskCompleted),
+                child: CheckBoxWidget(
+                  wasCheck: taskCompleted,
+                  screenSize: screenSize,
                 ),
               ),
               SizedBox(width: screenSize * 0.037),

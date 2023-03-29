@@ -36,7 +36,10 @@ class ViewChatPage extends StatelessWidget {
                   ),
                   child: SizedBox(
                     height: screenSize * 0.117,
-                    child: ListFilterButtonWidget(filterList: filters),
+                    child: ListFilterButtonWidget(
+                      filterList: filters,
+                      screenSize: screenSize,
+                    ),
                   ),
                 ),
                 SizedBox(height: screenSize * 0.058),
@@ -54,6 +57,7 @@ class ViewChatPage extends StatelessWidget {
                         child: ExpandedListWidget(
                           group: groups[index].text,
                           active: groups[index].active,
+                          screenSize: screenSize,
                         ),
                       );
                     },
@@ -66,6 +70,7 @@ class ViewChatPage extends StatelessWidget {
             bottom: 0,
             child: MenuBarWidget(
               menuList: menu,
+              screenSize: screenSize,
             ),
           ),
         ],

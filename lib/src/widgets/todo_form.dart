@@ -1,13 +1,15 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, lines_longer_than_80_chars
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class TodoFormList extends StatefulWidget {
   Function(DateTime, String)? onRefreshScreen;
+  final double screenSize;
 
   TodoFormList({
     super.key,
     required this.onRefreshScreen,
+    required this.screenSize,
   });
 
   @override
@@ -17,15 +19,15 @@ class TodoFormList extends StatefulWidget {
 class _TodoFormListState extends State<TodoFormList> {
   final taskController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final colors = MyColors();
   late DateTime dateTime;
-  late final dateReserved;
+  // ignore: type_annotate_public_apis, prefer_typing_uninitialized_variables
+  late final reservedDate;
   bool validate = true;
 
   @override
   void initState() {
     dateTime = DateTime.now();
-    dateReserved = dateTime;
+    reservedDate = dateTime;
 
     super.initState();
   }
@@ -33,7 +35,7 @@ class _TodoFormListState extends State<TodoFormList> {
   Future<DateTime?> pickDate() => showDatePicker(
         context: context,
         initialDate: dateTime,
-        firstDate: dateReserved,
+        firstDate: reservedDate,
         lastDate: DateTime(3000),
       );
 
@@ -68,102 +70,139 @@ class _TodoFormListState extends State<TodoFormList> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<ThemeCustom>()!;
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
+    final textStyle = Theme.of(context).textTheme;
 
     return Container(
-      color: Colors.amber,
+      color: theme.profileCardTheme,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Center(
             child: Form(
               key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: taskController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final time = await pickTime();
-
-                          if (time == null) return;
-
-                          final newDateTime = DateTime(
-                            dateTime.year,
-                            dateTime.month,
-                            dateTime.day,
-                            time.hour,
-                            time.minute,
-                          );
-                          setState(() => dateTime = newDateTime);
-                        },
-                        child: Text(
-                          '$hours:$minutes',
-                          style: TextStyle(
-                            color: validate
-                                ? colors.profileButton
-                                : colors.deleted,
+              child: SizedBox(
+                width: widget.screenSize * 0.8,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: taskController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final date = await pickDate();
-                          if (date == null) return;
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              theme.profileButton!,
+                            ),
+                          ),
+                          onPressed: () async {
+                            final time = await pickTime();
 
-                          final newDateTime = DateTime(
-                            date.year,
-                            date.month,
-                            date.day,
-                            dateTime.hour,
-                            dateTime.minute,
-                          );
+                            if (time == null) return;
 
-                          setState(() => dateTime = newDateTime);
-                        },
-                        child: Text(
-                          '${dateTime.day}/${dateTime.month}/${dateTime.year}',
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate() == true &&
-                              validatorData() == true) {
-                            widget.onRefreshScreen!(
-                              dateTime,
-                              taskController.text,
+                            final newDateTime = DateTime(
+                              dateTime.year,
+                              dateTime.month,
+                              dateTime.day,
+                              time.hour,
+                              time.minute,
                             );
-                            Navigator.pop(context);
-                          } else if (validatorData() == false) {}
-                        },
-                        child: const Text('Save'),
+                            setState(() => dateTime = newDateTime);
+                          },
+                          child: Text(
+                            '$hours:$minutes',
+                            style: validate
+                                ? textStyle.subtitle1
+                                : theme.buttonError,
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              theme.profileButton!,
+                            ),
+                          ),
+                          onPressed: () async {
+                            final date = await pickDate();
+                            if (date == null) return;
+
+                            final newDateTime = DateTime(
+                              date.year,
+                              date.month,
+                              date.day,
+                              dateTime.hour,
+                              dateTime.minute,
+                            );
+
+                            setState(() => dateTime = newDateTime);
+                          },
+                          child: Text(
+                            '${dateTime.day}/${dateTime.month}/${dateTime.year}',
+                            style: textStyle.subtitle1,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (validate == false)
+                      Text(
+                        'Hora invalida',
+                        style: TextStyle(
+                          color: theme.deleted,
+                    ),
                       ),
-                      ElevatedButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('Cancel'),
-                      ),
-                    ],
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              theme.profileButton!,
+                            ),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() == true &&
+                                validatorData() == true) {
+                              widget.onRefreshScreen!(
+                                dateTime,
+                                taskController.text,
+                              );
+                              Navigator.pop(context);
+                            }
+                          },
+                          child: Text(
+                            'Save',
+                            style: textStyle.subtitle1,
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              theme.profileButton!,
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(
+                            'Cancel',
+                            style: textStyle.subtitle1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

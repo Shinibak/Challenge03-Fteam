@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../themes/colors.dart';
+import '../themes/theme_extensions.dart';
 
 class SearchWidget extends StatelessWidget {
   final double screenSize;
@@ -8,13 +8,13 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
-    final colors = MyColors();
+    final theme = Theme.of(context).extension<ThemeCustom>()!;    
 
     return Container(
       height: screenSize * 0.16,
       width: screenSize * 0.906,
       decoration: BoxDecoration(
-        color: colors.backOpacity,
+        color: theme.backOpacity,
         borderRadius: BorderRadius.circular(screenSize * 0.053),
       ),
       child: Row(

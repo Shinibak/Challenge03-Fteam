@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../themes/theme_extensions.dart';
 
 class MenuButtonWidget extends StatefulWidget {
