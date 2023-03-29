@@ -113,7 +113,8 @@ class TodoItemWidget extends StatelessWidget {
                   ),
                   SizedBox(height: screenSize * 0.026),
                   Text(
-                    '${month.format(todoData)} ${todoData.day}, ${todoData.year} ${todoData.hour}:${todoData.minute} $period',
+                    '''
+${month.format(todoData)} ${todoData.day}, ${todoData.year} ${todoData.hour}:${todoData.minute} $period''',
                     style: style,
                   ),
                 ],

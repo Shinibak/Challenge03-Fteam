@@ -7,7 +7,7 @@ ThemeData get darkTheme => ThemeData(
       scaffoldBackgroundColor: const Color(0xff1f222a),
       iconTheme: const IconThemeData(color: Colors.white),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Color(0xff6963db),
+       backgroundColor: Color(0xff6963db),
       ),
       textTheme: const TextTheme(
         headline6: TextStyle(fontSize: 10, color: Colors.white),

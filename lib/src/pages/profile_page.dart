@@ -41,7 +41,6 @@ class _ProfilePageState extends State<ProfilePage> {
     final putRepository = TodoPutRepository(putDatasource);
     final controller = TodoController(putRepository, getRepository);
     controller.getTodo(profile.name);
-    
 
     return Scaffold(
       body: AnimatedBuilder(
@@ -88,6 +87,8 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor:
+            Theme.of(context).floatingActionButtonTheme.backgroundColor,
         onPressed: () {
           showModalBottomSheet(
             context: context,
